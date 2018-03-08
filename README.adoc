@@ -1,0 +1,3 @@
+# eXo Monitoring stack
+
+This repository aims to give a ready to use Monitoring stack for eXo Platform 5+.

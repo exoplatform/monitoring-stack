@@ -1,0 +1,43 @@
+# config file version
+apiVersion: 1
+
+# list of datasources that should be deleted from the database
+deleteDatasources:
+  - name: influxdb
+    orgId: 1
+  - name: exo
+    orgId: 1
+  - name: traefik
+    orgId: 1
+
+datasources:
+- name: influxdb_exo
+  type: influxdb
+  access: proxy
+  orgId: 1
+  url: http://influxdb:8086
+  database: _internal
+  jsonData:
+    timeInterval: "10s"
+  version: 1
+  editable: false
+- name: traefik_exo
+  type: influxdb
+  access: proxy
+  orgId: 1
+  url: http://influxdb:8086
+  database: traefik
+  jsonData:
+    timeInterval: "10s"
+  version: 1
+  editable: false
+- name: monitoring_exo
+  type: influxdb
+  access: proxy
+  orgId: 1
+  url: http://influxdb:8086
+  database: exo
+  jsonData:
+    timeInterval: "10s"
+  version: 1
+  editable: false

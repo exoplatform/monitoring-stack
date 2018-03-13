@@ -1,0 +1,19 @@
+debug = false
+logLevel = "ERROR"
+
+[api]
+    [api.statistics]
+        recentErrors = 10
+
+[docker]
+    endpoint = "unix:///var/run/docker.sock"
+    watch = true
+    exposedbydefault = false
+
+[metrics]
+    [metrics.statistics]
+        recentErrors = 10
+    [metrics.influxdb]
+        address = "influxdb:8089"
+        database = "traefik"
+        pushinterval = "10s"

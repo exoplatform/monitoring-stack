@@ -1,3 +1,87 @@
-# eXo Monitoring stack
+= eXo Monitoring stack
+:imagesdir: doc/images
+:toc:
+
+*status* : [big red]#beta#
 
 This repository aims to give a ready to use Monitoring stack for eXo Platform 5+.
+
+WARNING: this configuration should not be exposed to internet due to very few security constraints applied on this configuration (ex: Influxdb is open for read and write access)
+
+
+== Architecture
+
+image::monitoring-stack-v1.png[]
+
+== install
+
+[NOTE]
+====
+prerequisites :
+
+* docker-compose 1.18+
+* docker 17.12.0-ce+
+* internet connection
+====
+
+First you need to checkout the project :
+
+[source,bash]
+----
+user@host:/opt/ $ git clone git@github.com:exoplatform/monitoring-stack.git
+----
+
+then create a `/opt/monitoring-stack/.env` file for your local configuration
+
+[source,bash]
+----
+user@host:/opt/monitoring-stack/ $ touch /opt/monitoring-stack/.env
+----
+
+and update it according to your needs :
+
+[source,bash]
+./opt/monitoring-stack/.env
+----
+# DNS hostname for Grafana (your DNS need to be configured accordingly)
+VHOST_GRAFANA=grafana.my-domain.com
+# The mysql password for exo user
+DB_GRAFANA_USER_PASSWORD=database-secret-password
+# password of the first Grafana administrator
+GF_SECURITY_ADMIN_PASSWORD=admin-secret-password
+# DNS hostname for Influxdb (your DNS need to be configured accordingly)
+VHOST_INFLUXDB=influxdb.my-domain.com
+----
+
+Finally start the monitoring stack
+
+[source,bash]
+----
+user@host:/opt/monitoring-stack/ $ docker-compose -f /opt/monitoring-stack/docker-compose.yml up -d
+----
+
+and go to http://grafana.my-domain.com and login with `admin` / `admin-secret-password`
+
+## local testing
+
+Add the following entries in your `/etc/hosts` file :
+
+[source]
+----
+127.0.0.1 grafana.docker.local
+127.0.0.1 influxdb.docker.local
+127.0.0.1 traefik.docker.local
+----
+
+Launch the monitoring stack with :
+
+[source,bash]
+----
+user@host:~/monitoring-stack $ docker-compose -f ./docker-compose.yml up -d
+----
+
+Then the following components are available :
+
+* Grafana : http://grafana.docker.local
+* Influxdb : http://influxdb.docker.local (no user interface)
+* Traefik : http://traefik.docker.local

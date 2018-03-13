@@ -1,0 +1,123 @@
+version: '2.1'
+services:
+  web:
+    image: traefik:${IMAGE_TRAEFIK_VERSION:-1.5-alpine}
+    hostname: traefik
+    restart: always
+    labels: 
+      traefik.enable: "true"
+      traefik.backend: traefik
+      traefik.port: "8080"
+      traefik.frontend.rule: "Host:${VHOST_WEB:-traefik.docker.local}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/etc/traefik/traefik.toml:ro
+    ports:
+      - "8080:8080"
+      - "80:80"
+      - "443:443"
+    networks: 
+      - front
+      - back
+  grafana:
+    image: grafana/grafana:${IMAGE_GRAFANA_VERSION:-5.0.1}
+    hostname: grafana
+    expose:
+      - '3000'
+    depends_on: 
+      # - influxdb
+      - db_grafana
+    environment:
+      GF_INSTANCE_NAME: ${GF_INSTANCE_NAME:-exo}
+      GF_DATABASE_TYPE: ${GF_DATABASE_TYPE:-mysql}
+      GF_DATABASE_HOST: ${GF_DATABASE_HOST:-db_grafana}
+      GF_DATABASE_NAME: ${DB_GRAFANA_DATABASE_NAME:-grafana}
+      GF_DATABASE_USER: ${DB_GRAFANA_USER:-exo}
+      GF_DATABASE_PASSWORD: ${DB_GRAFANA_USER_PASSWORD-exo}
+      GF_SECURITY_ADMIN_USER: ${GF_SECURITY_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD:-admin}
+      GF_SECURITY_LOGIN_REMEMBER_DAYS: "30"
+      GF_USERS_ALLOW_SIGN_UP: ${GF_USERS_ALLOW_SIGN_UP:-false}
+      GF_USERS_ALLOW_ORG_CREATE: "true"
+      GF_AUTH_ANONYMOUS_ENABLED: ${GF_AUTH_ANONYMOUS_ENABLED:-false}
+      GF_SNAPSHOTS_EXTERNAL_ENABLED: "false"
+      GF_INSTALL_PLUGINS: ""
+    labels: 
+      traefik.enable: "true"
+      traefik.backend: grafana
+      traefik.port: "3000"
+      traefik.frontend.rule: "Host:${VHOST_GRAFANA:-grafana.docker.local}"
+    volumes:
+      - ./grafana/provisioning/:/etc/grafana/provisioning/:ro
+      - ./grafana/dashboards/:/var/lib/grafana/dashboards/
+      - grafana_data:/var/lib/grafana:rw
+      - grafana_log:/var/log/grafana:rw
+    restart: on-failure
+    links:
+      - influxdb
+      - db_grafana
+    networks:
+      - back
+  db_grafana:
+    image: ${IMAGE_GRAFANA_DB_NAME:-mysql}:${IMAGE_GRAFANA_DB_VERSION:-5.6}
+    hostname: db-grafana
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_GRAFANA_ROOT_PASSWORD:-secretpassword}
+      MYSQL_DATABASE: ${DB_GRAFANA_DATABASE_NAME:-grafana}
+      MYSQL_USER: ${DB_GRAFANA_USER:-exo}
+      MYSQL_PASSWORD: ${DB_GRAFANA_USER_PASSWORD-exo}
+    labels: 
+      traefik.enable: "false"
+    volumes:
+      - db_grafana_data:/var/lib/mysql:rw
+    networks:
+      - back
+  influxdb:
+    image: influxdb:${IMAGE_INFLUXDB_VERSION:-1.5-alpine}
+    hostname: influxdb
+    expose: 
+      - '8086'
+    environment:
+      INFLUXDB_REPORTING_DISABLED: "true"
+      INFLUXDB_HTTP_ENABLE: "true"
+      INFLUXDB_HTTP_LOG_ENABLED: "false"
+      INFLUXDB_HTTP_MAX_ROW_LIMIT: "10000"
+      INFLUXDB_UDP_ENABLED: "true"
+      INFLUXDB_UDP_BIND_ADDRESS: "0.0.0.0:8089"
+      INFLUXDB_UDP_DATABASE: "traefik"
+      #
+      INFLUXDB_COORDINATOR_QUERY_TIMEOUT: "10s"
+      # meta
+      INFLUXDB_META_RETENTION_AUTOCREATE: "true"
+      INFLUXDB_META_LOGGING_ENABLED: "false"
+      INFLUXDB_META_DIR: "/var/lib/influxdb/meta"
+      # data
+      INFLUXDB_DATA_INDEX_VERSION: "tsi1"
+      INFLUXDB_DATA_DIR: "/var/lib/influxdb/data"
+      INFLUXDB_DATA_TRACE_LOGGING_ENABLED: "false"
+      INFLUXDB_DATA_QUERY_LOG_ENABLED: "false"
+      INFLUXDB_DATA_WAL_FSYNC_DELAY: "0s" # values in the range of 0ms-100ms for non-SSD 
+      INFLUXDB_DATA_WAL_DIR: "/var/lib/influxdb/wal"
+      # monitoring
+      INFLUXDB_MONITOR_STORE_ENABLED: "true"
+    labels: 
+      traefik.enable: "true"
+      traefik.backend: influxdb
+      traefik.port: "8086"
+      traefik.frontend.rule: "Host:${VHOST_INFLUXDB:-influxdb.docker.local}"
+    volumes:
+      - influxdb_data:/var/lib/influxdb:rw
+      - influxdb_log:/var/log/influxdb:rw
+    networks:
+      - back
+    restart: on-failure
+volumes:
+  grafana_data:
+  grafana_log:
+  db_grafana_data:
+  influxdb_data:
+  influxdb_log:
+networks:
+  front:
+    driver: bridge
+  back:

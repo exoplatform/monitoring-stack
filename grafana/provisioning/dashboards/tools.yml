@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+- name: 'tools'
+  orgId: 1
+  folder: 'Tools'
+  type: file
+  disableDeletion: true
+  editable: false
+  options:
+    path: /var/lib/grafana/dashboards/tools/

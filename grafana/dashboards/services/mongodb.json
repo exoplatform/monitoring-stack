@@ -1,0 +1,2751 @@
+{
+  "annotations": {
+    "list": [{
+      "$$hashKey": "object:3167",
+      "builtIn": 1,
+      "datasource": "-- Grafana --",
+      "enable": true,
+      "hide": true,
+      "iconColor": "rgba(0, 211, 255, 1)",
+      "name": "Annotations & Alerts",
+      "type": "dashboard"
+    }]
+  },
+  "description": "Overview of a mongodb instance",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 1,
+  "iteration": 1527696981069,
+  "links": [{
+    "icon": "external link",
+    "includeVars": true,
+    "keepTime": true,
+    "tags": [],
+    "type": "dashboards"
+  }],
+  "panels": [{
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 18,
+      "panels": [],
+      "repeat": null,
+      "title": "Dashboard Row",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [{
+          "alias": "queries",
+          "color": "#447EBC"
+        },
+        {
+          "alias": "inserts",
+          "color": "#508642"
+        },
+        {
+          "alias": "updates",
+          "color": "#BA43A9"
+        },
+        {
+          "alias": "deletes",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "getmores",
+          "color": "#58140C"
+        },
+        {
+          "alias": "commands",
+          "color": "#99440A"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$col",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "queries_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "queries"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "inserts_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "inserts"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "updates_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "updates"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "deletes_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "deletes"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "getmores_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "getmores"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "commands_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "commands"
+              ],
+              "type": "alias"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "All Queries",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "ops",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 1
+      },
+      "id": 3,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [{
+          "alias": "select",
+          "color": "#447EBC"
+        },
+        {
+          "alias": "inserts",
+          "color": "#508642"
+        },
+        {
+          "alias": "updates",
+          "color": "#BA43A9"
+        },
+        {
+          "alias": "deletes",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "getmores",
+          "color": "#58140C"
+        },
+        {
+          "alias": "commands",
+          "color": "#99440A"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$col",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb",
+        "orderByTime": "ASC",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "queries_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "select"
+              ],
+              "type": "alias"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Select queries",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "ops",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "id": 17,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [{
+          "alias": "queries",
+          "color": "#447EBC"
+        },
+        {
+          "alias": "inserts",
+          "color": "#508642"
+        },
+        {
+          "alias": "updates",
+          "color": "#BA43A9"
+        },
+        {
+          "alias": "deletes",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "getmores",
+          "color": "#58140C"
+        },
+        {
+          "alias": "commands",
+          "color": "#99440A"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$col",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb",
+        "orderByTime": "ASC",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "inserts_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "inserts"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "updates_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "updates"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "deletes_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "deletes"
+              ],
+              "type": "alias"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Insert / Update / Delete queries",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "ops",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 19,
+      "panels": [],
+      "repeat": null,
+      "title": "Dashboard Row",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 9
+      },
+      "id": 2,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [{
+        "alias": "flushes",
+        "color": "#E5AC0E"
+      }],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$col",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "flushes_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "flushes"
+              ],
+              "type": "alias"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Flushes",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "ops",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 3,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 9
+      },
+      "id": 4,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [{
+          "alias": "mean",
+          "color": "#447EBC",
+          "fillBelowTo": "min",
+          "lines": false
+        },
+        {
+          "alias": "max",
+          "color": "#890F02",
+          "fillBelowTo": "mean",
+          "lines": false
+        },
+        {
+          "alias": "min",
+          "fill": 0
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$col",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "open_connections"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "mean"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "open_connections"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "max"
+            },
+            {
+              "params": [
+                "max"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "open_connections"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "min"
+            },
+            {
+              "params": [
+                "min"
+              ],
+              "type": "alias"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Open Connections",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 3,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 9
+      },
+      "id": 5,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [{
+          "alias": "reads",
+          "color": "#447EBC",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "writes",
+          "color": "#890F02"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$col",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "queued_reads"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "max"
+            },
+            {
+              "params": [
+                "reads"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "queued_writes"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "max"
+            },
+            {
+              "params": [
+                "writes"
+              ],
+              "type": "alias"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Queued Reads / Writes",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 20,
+      "panels": [],
+      "repeat": null,
+      "title": "Dashboard Row",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 4,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 6,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [{
+          "alias": "in",
+          "color": "#1F78C1",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "out",
+          "color": "#890F02"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$col",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "net_in_bytes"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "in"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "net_out_bytes"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "out"
+              ],
+              "type": "alias"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Network",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "Bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 4,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 17
+      },
+      "id": 7,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [{
+          "alias": "reads",
+          "color": "#1F78C1",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "writes",
+          "color": "#EF843C"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$col",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "active_reads"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "reads"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "active_writes"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "writes"
+              ],
+              "type": "alias"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Read / Writes",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 21,
+      "panels": [],
+      "repeat": null,
+      "title": "Dashboard Row",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 25
+      },
+      "id": 8,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$col",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "mapped_megabytes"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "mapped"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "non-mapped_megabytes"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "non-mapped"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "resident_megabytes"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "resident"
+              ],
+              "type": "alias"
+            }
+          ],
+          [{
+              "params": [
+                "vsize_megabytes"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            },
+            {
+              "params": [
+                "vsize"
+              ],
+              "type": "alias"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Memory",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "decmbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "page faults": "#890F02"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 4,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "id": 9,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$col",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "page_faults_per_sec"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [
+                "1"
+              ],
+              "type": "top"
+            },
+            {
+              "params": [
+                "page faults"
+              ],
+              "type": "alias"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Page Faults",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "ops",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 22,
+      "panels": [],
+      "repeat": null,
+      "title": "Databases statistics",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 33
+      },
+      "id": 14,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$tag_db_name",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "db_name"
+            ],
+            "type": "tag"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb_db_stats",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "objects"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Documents number",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 33
+      },
+      "id": 10,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$tag_db_name",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "db_name"
+            ],
+            "type": "tag"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb_db_stats",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "collections"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Collections number",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 33
+      },
+      "id": 11,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$tag_db_name",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "db_name"
+            ],
+            "type": "tag"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb_db_stats",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "indexes"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Indexes number",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 40
+      },
+      "id": 15,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$tag_db_name",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "db_name"
+            ],
+            "type": "tag"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb_db_stats",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "storage_size"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Storage size",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 40
+      },
+      "id": 12,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$tag_db_name",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "db_name"
+            ],
+            "type": "tag"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb_db_stats",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "data_size"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Data size",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 40
+      },
+      "id": 13,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$tag_db_name",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "db_name"
+            ],
+            "type": "tag"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb_db_stats",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "index_size"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Index size",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "monitoring_exo",
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 47
+      },
+      "id": 16,
+      "interval": "$inter",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{
+        "alias": "$tag_db_name",
+        "dsType": "influxdb",
+        "groupBy": [{
+            "params": [
+              "$interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "db_name"
+            ],
+            "type": "tag"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "measurement": "mongodb_db_stats",
+        "policy": "default",
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "num_extents"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            }
+          ]
+        ],
+        "tags": [{
+          "key": "host",
+          "operator": "=~",
+          "value": "/^$hosts$/"
+        }]
+      }],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Number of extents",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [{
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 16,
+  "style": "dark",
+  "tags": [
+    "mongodb",
+    "host"
+  ],
+  "templating": {
+    "list": [{
+        "auto": true,
+        "auto_count": 100,
+        "auto_min": "30s",
+        "current": {
+          "text": "auto",
+          "value": "$__auto_interval_inter"
+        },
+        "hide": 0,
+        "label": "Interval",
+        "name": "inter",
+        "options": [{
+            "selected": true,
+            "text": "auto",
+            "value": "$__auto_interval_inter"
+          },
+          {
+            "selected": false,
+            "text": "30s",
+            "value": "30s"
+          },
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          }
+        ],
+        "query": "30s,1m,10m,30m,1h,6h,12h,1d",
+        "refresh": 2,
+        "type": "interval"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "exo",
+          "value": "exo"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Infrastructure",
+        "multi": false,
+        "name": "infra",
+        "options": [{
+          "$$hashKey": "object:3381",
+          "selected": true,
+          "text": "exo",
+          "value": "exo"
+        }],
+        "query": "exo",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "monitoring_exo",
+          "value": "monitoring_exo"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "monitoring_infra_ds",
+        "options": [],
+        "query": "influxdb",
+        "refresh": 1,
+        "regex": "/monitoring_$infra/",
+        "type": "datasource"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "poc",
+          "value": "poc"
+        },
+        "datasource": "monitoring_exo",
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "environment",
+        "options": [],
+        "query": "SHOW TAG VALUES FROM \"mongodb\" WITH KEY = \"environment\"",
+        "refresh": 2,
+        "regex": "",
+        "sort": 0,
+        "tagValuesQuery": null,
+        "tags": [],
+        "tagsQuery": null,
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "PP-MONGO1",
+          "value": "PP-MONGO1"
+        },
+        "datasource": "monitoring_exo",
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "hosts",
+        "options": [],
+        "query": "SHOW TAG VALUES FROM \"mongodb\" WITH KEY = \"host\" WHERE \"environment\"='$environment'",
+        "refresh": 2,
+        "regex": "",
+        "sort": 0,
+        "tagValuesQuery": null,
+        "tags": [],
+        "tagsQuery": null,
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "MongoDB",
+  "uid": "000000016",
+  "version": 2
+}

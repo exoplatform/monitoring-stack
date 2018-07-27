@@ -41,3 +41,13 @@ datasources:
     timeInterval: "10s"
   version: 1
   editable: false
+- name: monitoring_jmeter
+  type: influxdb
+  access: proxy
+  orgId: 1
+  url: http://influxdb:8086
+  database: jmeter
+  jsonData:
+    timeInterval: "10s"
+  version: 1
+  editable: false

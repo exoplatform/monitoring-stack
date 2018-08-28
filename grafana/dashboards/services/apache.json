@@ -17,7 +17,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "iteration": 1535468826755,
+    "iteration": 1535473159518,
     "links": [],
     "panels": [
       {
@@ -440,7 +440,7 @@
           "x": 0,
           "y": 12
         },
-        "id": 2,
+        "id": 7,
         "interval": "$inter",
         "legend": {
           "avg": false,
@@ -461,12 +461,10 @@
         "renderer": "flot",
         "seriesOverrides": [
           {
-            "alias": "idle",
-            "color": "#7EB26D"
-          },
-          {
-            "alias": "busy",
-            "color": "#E24D42"
+            "alias": "cpu load",
+            "bars": true,
+            "color": "#EF843C",
+            "lines": false
           }
         ],
         "spaceLength": 10,
@@ -474,6 +472,7 @@
         "steppedLine": false,
         "targets": [
           {
+            "$$hashKey": "object:254",
             "alias": "$col",
             "dsType": "influxdb",
             "groupBy": [
@@ -491,6 +490,7 @@
               }
             ],
             "measurement": "apache",
+            "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
             "resultFormat": "time_series",
@@ -498,7 +498,7 @@
               [
                 {
                   "params": [
-                    "BusyWorkers"
+                    "CPULoad"
                   ],
                   "type": "field"
                 },
@@ -508,25 +508,7 @@
                 },
                 {
                   "params": [
-                    "busy"
-                  ],
-                  "type": "alias"
-                }
-              ],
-              [
-                {
-                  "params": [
-                    "IdleWorkers"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                },
-                {
-                  "params": [
-                    "idle"
+                    "cpu load"
                   ],
                   "type": "alias"
                 }
@@ -556,7 +538,7 @@
         "thresholds": [],
         "timeFrom": null,
         "timeShift": null,
-        "title": "Workers",
+        "title": "CPU Load",
         "tooltip": {
           "msResolution": false,
           "shared": true,
@@ -577,7 +559,7 @@
             "label": null,
             "logBase": 1,
             "max": null,
-            "min": null,
+            "min": "0",
             "show": true
           },
           {
@@ -778,6 +760,175 @@
             "max": null,
             "min": null,
             "show": false
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "monitoring_exo",
+        "editable": true,
+        "error": false,
+        "fill": 7,
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 16,
+          "y": 12
+        },
+        "id": 2,
+        "interval": "$inter",
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": false,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "connected",
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "alias": "idle",
+            "color": "#7EB26D"
+          },
+          {
+            "alias": "busy",
+            "color": "#E24D42"
+          }
+        ],
+        "spaceLength": 10,
+        "stack": true,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "$col",
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "measurement": "apache",
+            "policy": "default",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "BusyWorkers"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                },
+                {
+                  "params": [
+                    "busy"
+                  ],
+                  "type": "alias"
+                }
+              ],
+              [
+                {
+                  "params": [
+                    "IdleWorkers"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                },
+                {
+                  "params": [
+                    "idle"
+                  ],
+                  "type": "alias"
+                }
+              ]
+            ],
+            "tags": [
+              {
+                "key": "host",
+                "operator": "=~",
+                "value": "/^$host$/"
+              },
+              {
+                "condition": "AND",
+                "key": "server",
+                "operator": "=~",
+                "value": "/^$server$/"
+              },
+              {
+                "condition": "AND",
+                "key": "port",
+                "operator": "=~",
+                "value": "/^$port$/"
+              }
+            ]
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Workers",
+        "tooltip": {
+          "msResolution": false,
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
           }
         ],
         "yaxis": {
@@ -1478,6 +1629,8 @@
         },
         {
           "current": {
+            "text": "monitoring_exo",
+            "value": "monitoring_exo"
           },
           "hide": 2,
           "label": null,
@@ -1589,5 +1742,5 @@
     "timezone": "browser",
     "title": "Apache",
     "uid": "000000010",
-    "version": 5
+    "version": 4
   }

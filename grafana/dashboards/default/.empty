@@ -1,0 +1,4 @@
+This is the place for default dashboards
+If not present the following log is generated each 3s on grafana :
+
+failed to search for dashboards" logger=provisioning.dashboard type=file name=default error="stat /var/lib/grafana/dashboards/default: no such file or directory"

@@ -4009,8 +4009,6 @@
       {
         "allValue": null,
         "current": {
-          "text": "PP-MYSQL1",
-          "value": "PP-MYSQL1"
         },
         "datasource": "$monitoring_infra_ds",
         "hide": 0,
@@ -4021,7 +4019,7 @@
         "options": [],
         "query": "SHOW TAG VALUES FROM \"mysql\" WITH KEY = \"host\"",
         "refresh": 1,
-        "regex": "",
+        "regex": "/^ *([a-zA-Z0-9-_]*) *$/",
         "sort": 0,
         "tagValuesQuery": null,
         "tags": [],

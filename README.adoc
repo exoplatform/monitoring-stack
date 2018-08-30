@@ -60,6 +60,13 @@ Finally start the monitoring stack
 user@host:/opt/monitoring-stack/ $ docker-compose -f /opt/monitoring-stack/docker-compose.yml up -d
 ----
 
+NOTE: If you want to use host network instead of standard bridge network, start the monitoring stack with the following command :
+[source,bash]
+----
+user@host:/opt/monitoring-stack/ $ docker-compose -f /opt/monitoring-stack/docker-compose.yml -f /opt/monitoring-stack/docker-compose.network-host.yml  up -d
+----
+
+
 and go to http://grafana.my-domain.com and login with `admin` / `admin-secret-password`
 
 ## local testing

@@ -1,0 +1,26 @@
+version: '2.1'
+services:
+  web:
+    networks: 
+      - front
+      - back
+  grafana:
+    networks:
+      - back
+    links:
+      - influxdb
+      - db_grafana
+  db_grafana:
+    networks:
+      - back
+  influxdb:
+    expose: 
+      - '8086'
+    networks:
+      - back
+
+
+networks:
+  front:
+    driver: bridge
+  back:

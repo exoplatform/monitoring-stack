@@ -16,9 +16,6 @@ services:
       - "8080:8080"
       - "80:80"
       - "443:443"
-    networks: 
-      - front
-      - back
   grafana:
     image: grafana/grafana:${IMAGE_GRAFANA_VERSION:-5.0.1}
     hostname: grafana
@@ -53,11 +50,6 @@ services:
       - grafana_data:/var/lib/grafana:rw
       - grafana_log:/var/log/grafana:rw
     restart: on-failure
-    links:
-      - influxdb
-      - db_grafana
-    networks:
-      - back
   db_grafana:
     image: ${IMAGE_GRAFANA_DB_NAME:-mysql}:${IMAGE_GRAFANA_DB_VERSION:-5.6}
     hostname: db-grafana
@@ -70,8 +62,6 @@ services:
       traefik.enable: "false"
     volumes:
       - db_grafana_data:/var/lib/mysql:rw
-    networks:
-      - back
   influxdb:
     image: influxdb:${IMAGE_INFLUXDB_VERSION:-1.5-alpine}
     hostname: influxdb
@@ -108,8 +98,6 @@ services:
     volumes:
       - influxdb_data:/var/lib/influxdb:rw
       - influxdb_log:/var/log/influxdb:rw
-    networks:
-      - back
     restart: on-failure
 volumes:
   grafana_data:
@@ -117,7 +105,3 @@ volumes:
   db_grafana_data:
   influxdb_data:
   influxdb_log:
-networks:
-  front:
-    driver: bridge
-  back:

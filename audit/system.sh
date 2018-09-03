@@ -1,11 +1,15 @@
+
 #/usr/bin/env bash
 
-source _functions.sh
+SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# shellcheck source=.
+source ${SCRIPT_DIR}/_functions.sh
 
 OUTPUT_DIR=/tmp/exo-audit/system
 
 mkdir -p ${OUTPUT_DIR}
-pushd ${OUTPUT_DIR}
+pushd ${OUTPUT_DIR} || exit
 
 date +%Y%m%d-%H%M > ${OUTPUT_DIR}/0_REPORT_DATE
 
@@ -76,4 +80,4 @@ fi
 
 echo ""
 echo "Result are stored on $(pwd) directory"
-popd
+popd || exit

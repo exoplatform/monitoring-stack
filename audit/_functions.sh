@@ -1,4 +1,6 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
+
+AUDIT_OUTPUT_BASE="/tmp/exo-audit"
 
 # Detect OS Type
 if [ ! -e /etc/os-release ]; then 

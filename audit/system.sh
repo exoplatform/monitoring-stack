@@ -1,5 +1,4 @@
-
-#/usr/bin/env bash
+#!/usr/bin/env bash
 
 SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 

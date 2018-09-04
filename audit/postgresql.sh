@@ -22,4 +22,3 @@ echo "show all" | psql -U exo -W exo > ${OUTPUT_DIR}/variables.lst
 
 echo ""
 echo "Result are stored on ${OUTPUT_DIR}"
-popd || exit

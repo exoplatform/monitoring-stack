@@ -78,5 +78,5 @@ else
 fi
 
 echo ""
-echo "Result are stored on $(pwd) directory"
+echo "Result are stored on $(pwd)"
 popd || exit

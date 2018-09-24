@@ -69,7 +69,7 @@ if [ -e /etc/monitrc ]; then
 fi
 
 echo "Checking backup manager usage..."
-if [ -e backup-manager.conf ]; then
+if [ -e /etc/backup-manager.conf ]; then
   echo "Backup manager detected"
   cp -v /etc/backup-manager.conf .
 else

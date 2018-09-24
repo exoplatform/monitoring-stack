@@ -48,9 +48,13 @@ fi
 ${SUDO} ls -al ${DATA_DIR} >> ${OUTPUT_DIR}/data.txt
 
 echo "Checking gatein directory sizes..."
-du -sch ${DATA_DIR}/* > ${OUTPUT_DIR}/data_sizes.txt 
-du -sch ${DATA_DIR}/jcr/* >> ${OUTPUT_DIR}/data_sizes.txt 
-du -sch ${DATA_DIR}/jcr/index/* >> ${OUTPUT_DIR}/data_sizes.txt 
+echo > ${OUTPUT_DIR}/data_sizes.txt
+${SUDO} ls gatein/data | xargs -n1 -i{} sudo du -sh gatein/data/{} >> ${OUTPUT_DIR}/data_sizes.txt
+echo >> ${OUTPUT_DIR}/data_sizes.txt
+${SUDO} ls gatein/data/jcr | xargs -n1 -i{} sudo du -sh gatein/data/jcr/{} >> ${OUTPUT_DIR}/data_sizes.txt
+echo >> ${OUTPUT_DIR}/data_sizes.txt
+${SUDO} ls gatein/data/jcr/index | xargs -n1 -i{} sudo du -sh gatein/data/jcr/index/{} >> ${OUTPUT_DIR}/data_sizes.txt
+echo >> ${OUTPUT_DIR}/data_sizes.txt
 
 echo "Getting server.xml..."
 # TODO obfuscation

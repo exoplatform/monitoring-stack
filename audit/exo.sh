@@ -41,8 +41,10 @@ if [ -n "${EXO_DATA_DIR}" ]; then
   DATA_DIR=${EXO_DATA_DIR}
   echo "Data directory : ${DATA_DIR}" >> ${OUTPUT_DIR}/data.txt
 else 
-  echo -n  "Data directory : " >> ${OUTPUT_DIR}/data.txt
-  readlink -f gateing/data >> ${OUTPUT_DIR}/data.txt
+  if readlink ${DATA_DIR} ; then
+    DATA_DIR=$(readlink -f ${DATA_DIR})
+  fi
+  echo -n  "Data directory : ${DATA_DIR}" >> ${OUTPUT_DIR}/data.txt
 fi
 
 ${SUDO} ls -al ${DATA_DIR} >> ${OUTPUT_DIR}/data.txt

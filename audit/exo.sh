@@ -64,6 +64,14 @@ echo "Getting server.xml..."
 # TODO obfuscation
 ${SUDO} cp conf/server.xml ${OUTPUT_DIR}/server.xml
 
+echo "Checking portal configuration..."
+if [ -d "gatein/conf/portal" ]; then
+  echo "Specific portal configuration detected"
+  cp -r gatein/conf/portal ${OUTPUT_DIR}
+else
+  touch ${OUTPUT_DIR}/portal.absent
+fi
+
 echo "Getting setenv-customize.sh..."
 if [ -e bin/setenv-customize.sh ]; then
     cat bin/setenv-customize.sh | grep -v -e "^#" -e '^[\t\s]*$' > ${OUTPUT_DIR}/setenv-customize.sh

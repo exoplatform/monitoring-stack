@@ -46,10 +46,10 @@ fi
 echo "Checking lvm installation..."
 if [ -e "/sbin/lvdisplay" ]; then
   # TODO use sudo
-  pvdisplay > lvm.txt
-  vgdisplay >> lvm.txt
-  lvdisplay >> lvm.txt
-else 
+  ${SUDO} pvdisplay > lvm.txt
+  ${SUDO} vgdisplay >> lvm.txt
+  ${SUDO} lvdisplay >> lvm.txt
+else
   echo "LVM not detected"
   echo "" > lvm.notinstalled
 fi

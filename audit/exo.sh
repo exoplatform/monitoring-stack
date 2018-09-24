@@ -24,6 +24,8 @@ $(which java) -version >> ${OUTPUT_DIR}/java_version.txt
 
 echo "Checking eXo content..."
 ls -al > ${OUTPUT_DIR}/root_directory.txt
+ls -al lib > ${OUTPUT_DIR}/lib_directory.txt
+ls -al webapps > ${OUTPUT_DIR}/webapps_directory.txt
 
 echo "Listing installed addons..."
 ./addon list --installed > ${OUTPUT_DIR}/addons.lst

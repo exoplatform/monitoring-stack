@@ -2279,10 +2279,10 @@
       "error": false,
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 32
+		"h": 9,
+		"w": 11,
+		"x": 0,
+		"y": 32
       },
       "id": 319,
       "interval": "$inter",
@@ -2365,7 +2365,7 @@
           "select": [
             [
               {
-                "params": ["HeapMemoryUsage_used"],
+                "params": ["used"],
                 "type": "field"
               },
               {
@@ -2379,7 +2379,7 @@
             ],
             [
               {
-                "params": ["HeapMemoryUsage_committed"],
+                "params": ["committed"],
                 "type": "field"
               },
               {
@@ -2393,7 +2393,7 @@
             ],
             [
               {
-                "params": ["HeapMemoryUsage_max"],
+                "params": ["max"],
                 "type": "field"
               },
               {
@@ -2407,7 +2407,7 @@
             ],
             [
               {
-                "params": ["HeapMemoryUsage_used"],
+                "params": ["used"],
                 "type": "field"
               },
               {
@@ -2421,7 +2421,7 @@
             ],
             [
               {
-                "params": ["HeapMemoryUsage_committed"],
+                "params": ["committed"],
                 "type": "field"
               },
               {
@@ -2445,7 +2445,13 @@
               "key": "node",
               "operator": "=~",
               "value": "/^$nodes$/"
-            }
+            },
+            {
+             "condition": "AND",
+             "key": "attributeName",
+             "operator": "=",
+			 "value": "HeapMemoryUsage"
+			}
           ]
         }
       ],
@@ -2485,7 +2491,254 @@
           "show": true
         }
       ]
-    },
+    },    
+	{
+	"aliasColors": {},
+	"bars": false,
+	"dashLength": 10,
+	"dashes": false,
+	"datasource": "$exoplatform_infra_ds",
+	"editable": true,
+	"error": false,
+	"fill": 1,
+	"gridPos": {
+		"h": 9,
+		"w": 13,
+		"x": 11,
+		"y": 32
+	},
+	"id": 1172,
+	"interval": "$inter",
+	"legend": {
+		"avg": false,
+		"current": false,
+		"max": false,
+		"min": false,
+		"show": true,
+		"total": false,
+		"values": false
+	},
+	"lines": true,
+	"linewidth": 1,
+	"links": [],
+	"nullPointMode": "null",
+	"percentage": false,
+	"pointradius": 5,
+	"points": false,
+	"renderer": "flot",
+	"seriesOverrides": [
+		{
+		"alias": "used",
+		"color": "#1F78C1",
+		"fill": 7,
+		"linewidth": 2,
+		"zindex": 1
+		},
+		{
+		"alias": "committed",
+		"color": "#F2C96D",
+		"fill": 8,
+		"zindex": 0
+		},
+		{
+		"alias": "max",
+		"color": "#890F02",
+		"linewidth": 4,
+		"zindex": -1
+		},
+		{
+		"alias": "used (max)",
+		"color": "#1f78c1",
+		"dashLength": 3,
+		"dashes": true,
+		"linewidth": 2,
+		"spaceLength": 3
+		},
+		{
+		"alias": "committed (max)",
+		"color": "#f2c96d",
+		"dashLength": 3,
+		"dashes": true,
+		"linewidth": 2,
+		"spaceLength": 3
+		}
+	],
+	"spaceLength": 10,
+	"stack": false,
+	"steppedLine": false,
+	"targets": [
+		{
+		"alias": "$col",
+		"dsType": "influxdb",
+		"groupBy": [
+			{
+			"params": [
+				"$interval"
+			],
+			"type": "time"
+			},
+			{
+			"params": [
+				"null"
+			],
+			"type": "fill"
+			}
+		],
+		"measurement": "jvm_memory_heap",
+		"orderByTime": "ASC",
+		"policy": "default",
+		"refId": "A",
+		"resultFormat": "time_series",
+		"select": [
+			[
+			{
+				"params": [
+				"used"
+				],
+				"type": "field"
+			},
+			{
+				"params": [],
+				"type": "mean"
+			},
+			{
+				"params": [
+				"used"
+				],
+				"type": "alias"
+			}
+			],
+			[
+			{
+				"params": [
+				"committed"
+				],
+				"type": "field"
+			},
+			{
+				"params": [],
+				"type": "mean"
+			},
+			{
+				"params": [
+				"committed"
+				],
+				"type": "alias"
+			}
+			],
+			[
+			{
+				"params": [
+				"max"
+				],
+				"type": "field"
+			},
+			{
+				"params": [],
+				"type": "max"
+			},
+			{
+				"params": [
+				"max"
+				],
+				"type": "alias"
+			}
+			],
+			[
+			{
+				"params": [
+				"used"
+				],
+				"type": "field"
+			},
+			{
+				"params": [],
+				"type": "max"
+			},
+			{
+				"params": [
+				"used (max)"
+				],
+				"type": "alias"
+			}
+			],
+			[
+			{
+				"params": [
+				"committed"
+				],
+				"type": "field"
+			},
+			{
+				"params": [],
+				"type": "max"
+			},
+			{
+				"params": [
+				"committed (max)"
+				],
+				"type": "alias"
+			}
+			]
+		],
+		"tags": [
+			{
+			"key": "host",
+			"operator": "=~",
+			"value": "/^$hosts$/"
+			},
+			{
+			"condition": "AND",
+			"key": "node",
+			"operator": "=~",
+			"value": "/^$nodes$/"
+			},
+			{
+			"condition": "AND",
+			"key": "attributeName",
+			"operator": "=",
+			"value": "NonHeapMemoryUsage"
+			}
+		]
+		}
+	],
+	"thresholds": [],
+	"timeFrom": null,
+	"timeShift": null,
+	"title": "Non-Heap used",
+	"tooltip": {
+		"msResolution": false,
+		"shared": true,
+		"sort": 0,
+		"value_type": "individual"
+	},
+	"type": "graph",
+	"xaxis": {
+		"buckets": null,
+		"mode": "time",
+		"name": null,
+		"show": true,
+		"values": []
+	},
+	"yaxes": [
+		{
+		"format": "decbytes",
+		"label": null,
+		"logBase": 1,
+		"max": null,
+		"min": "0",
+		"show": true
+		},
+		{
+		"format": "short",
+		"label": null,
+		"logBase": 1,
+		"max": null,
+		"min": null,
+		"show": true
+		}
+	]
+	},    
     {
       "aliasColors": {},
       "bars": false,
@@ -2584,7 +2837,7 @@
           "select": [
             [
               {
-                "params": ["Usage_used"],
+                "params": ["used"],
                 "type": "field"
               },
               {
@@ -2598,7 +2851,7 @@
             ],
             [
               {
-                "params": ["Usage_committed"],
+                "params": ["committed"],
                 "type": "field"
               },
               {
@@ -2612,7 +2865,7 @@
             ],
             [
               {
-                "params": ["Usage_max"],
+                "params": ["max"],
                 "type": "field"
               },
               {
@@ -2640,7 +2893,7 @@
             ],
             [
               {
-                "params": ["Usage_committed"],
+                "params": ["committed"],
                 "type": "field"
               },
               {
@@ -2808,7 +3061,7 @@
           "select": [
             [
               {
-                "params": ["Usage_used"],
+                "params": ["used"],
                 "type": "field"
               },
               {
@@ -2836,7 +3089,7 @@
             ],
             [
               {
-                "params": ["Usage_max"],
+                "params": ["max"],
                 "type": "field"
               },
               {
@@ -2850,7 +3103,7 @@
             ],
             [
               {
-                "params": ["Usage_used"],
+                "params": ["used"],
                 "type": "field"
               },
               {
@@ -2864,7 +3117,7 @@
             ],
             [
               {
-                "params": ["Usage_committed"],
+                "params": ["committed"],
                 "type": "field"
               },
               {

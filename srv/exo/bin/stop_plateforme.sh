@@ -20,6 +20,7 @@ echo "[INFO] ======================================="
 
 ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopPLF.sh
 ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_stopElasticSearch.sh
-#ssh ${COMMUNITY_MYSQL_SERVER} ${SCRIPT_DIR}/_stopDatabase.sh
+ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_DB_SERVER} ${SCRIPT_DIR}/_stopDatabase.sh
+ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_MONGO_SERVER} ${SCRIPT_DIR}/_stopMongo.sh
 
 echo "[INFO] $(display_date) Done"

@@ -4,21 +4,22 @@
 # Initialize
 # #############################################################################                                              
 SCRIPT_NAME="${0##*/}"
-echo $SCRIPT_NAME
 SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Load env settings
 source ${SCRIPT_DIR}/_setenv.sh
 # Load common functions
 source ${SCRIPT_DIR}/_functions.sh
-echo ""
-echo "[INFO] ======================================="
-echo "[INFO] = $(display_date) Start ${PLF_NAME} server on ${HOSTNAME} ..."
-echo "[INFO] ======================================="
-ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_DB_SERVER} ${SCRIPT_DIR}/_startDataBase.sh
-ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_MONGO_SERVER} ${SCRIPT_DIR}/_startMongo.sh
-ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_startElasticSearch.sh
-ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_startPLF.sh
 
-echo "[INFO] $(display_date) Done"
+echo "[INFO] ======================================="
+echo "[INFO] Stoping MongoDB server on ${HOSTNAME}..."
+echo "[INFO] ======================================="
+
+if [ -e /lib/systemd/system/mongod.service ]; then
+
+  echo ""
+  ACTION=stop  
+  sudo systemctl ${ACTION} mongod
+fi
+echo "[INFO] Done"
 

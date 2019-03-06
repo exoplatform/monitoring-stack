@@ -30,3 +30,9 @@ EXO_USER=exo
 #Database Backup
 DB_DUMP_WORKING_DIR=/srv/backup
 PLF_DATABASE_NAME=exo
+#Data Backup
+PLF_BCK_DIR=/srv/backup
+DATA_WORKING_DIR=/srv/data/exo
+#Mongo Backup
+MONGODB_DUMP_WORKING_DIR=/srv/backup
+EXO_CHAT_MONGODB_NAME=chat

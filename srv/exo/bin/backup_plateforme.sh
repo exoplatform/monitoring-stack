@@ -15,14 +15,18 @@ source ${SCRIPT_DIR}/_functions.sh
 
 DOWNTIME_START_TIME=$(date +%s)
 # Stop it
-#ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopPLF.sh
+ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopPLF.sh
 
+# Dump data
+ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_dumpData.sh
 # Dump database
 ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_DB_SERVER} ${SCRIPT_DIR}/_dumpDatabase.sh
+# Dump MongoDB
+ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_MONGO_SERVER} ${SCRIPT_DIR}/_dumpMongoDb.sh
 
 # Start it
 
-#ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_startPLF.sh
+ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_startPLF.sh
 DOWNTIME_END_TIME=$(date +%s)
 
 SCRIPT_END_TIME=$(date +%s)

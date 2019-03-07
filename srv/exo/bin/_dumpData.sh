@@ -20,6 +20,7 @@ pushd ${PLF_BCK_DIR} > /dev/null 2>&1
 echo "[INFO] ======================================="
 echo "[INFO] = Compressing ${PLF_NAME} data into ${PLF_BCK_DIR}/${PLF_NAME}-data-${SCRIPT_DATE}.tar.bz2 ..."
 echo "[INFO] ======================================="
+echo "[INFO] $(display_date)"
 pushd ${PLF_BCK_DIR} > /dev/null 2>&1
 display_time tar --directory ${DATA_WORKING_DIR} --use-compress-prog=pbzip2 -cpf ${PLF_BCK_DIR}/${PLF_NAME}-data-${SCRIPT_DATE}.tar.bz2 data  
 pushd ${PLF_BCK_DIR} > /dev/null 2>&1

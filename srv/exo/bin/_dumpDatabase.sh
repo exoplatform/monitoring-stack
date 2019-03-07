@@ -21,7 +21,6 @@ echo "[INFO] ======================================="
 echo "[INFO] = Dumping database ${PLF_DATABASE_NAME} into ${DB_DUMP_WORKING_DIR} ..."
 echo "[INFO] ======================================="
 
-
 display_time sudo mysqldump ${DUMP_OPTIONS} ${PLF_DATABASE_NAME} > ${DB_DUMP_WORKING_DIR}/${PLF_DATABASE_NAME}-dumpDataBase.sql
 
 echo "[INFO] Done"

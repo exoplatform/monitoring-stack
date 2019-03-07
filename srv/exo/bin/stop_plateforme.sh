@@ -8,7 +8,7 @@ SCRIPT_NAME="${0##*/}"
 SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Load env settings
-source ${SCRIPT_DIR}/_setenv.sh
+source ${SCRIPT_DIR}/_setenv-template.sh
 # Load common functions
 source ${SCRIPT_DIR}/_functions.sh
 
@@ -18,9 +18,9 @@ echo "[INFO] ======================================="
 echo "[INFO] = $(display_date) Stop ${PLF_NAME} (leader:${HOSTNAME})..."
 echo "[INFO] ======================================="
 
-ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopPLF.sh
-ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_stopElasticSearch.sh
-ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_DB_SERVER} ${SCRIPT_DIR}/_stopDatabase.sh
-ssh -i ${SCRIPT_DIR}/id_rsa ${EXO_USER}@${EXO_MONGO_SERVER} ${SCRIPT_DIR}/_stopMongo.sh
+ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopPLF.sh
+ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_stopElasticSearch.sh
+ssh ${EXO_USER}@${EXO_DB_SERVER} ${SCRIPT_DIR}/_stopDatabase.sh
+ssh ${EXO_USER}@${EXO_MONGO_SERVER} ${SCRIPT_DIR}/_stopMongo.sh
 
 echo "[INFO] $(display_date) Done"

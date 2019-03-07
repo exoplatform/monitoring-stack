@@ -9,7 +9,7 @@ SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SCRIPT_START_TIME=$(date +%s)
 
 # Load env settings
-source ${SCRIPT_DIR}/_setenv.sh
+source ${SCRIPT_DIR}/_setenv-template.sh
 # Load common functions
 source ${SCRIPT_DIR}/_functions.sh
 

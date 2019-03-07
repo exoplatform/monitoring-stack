@@ -7,7 +7,7 @@ SCRIPT_NAME="${0##*/}"
 SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Load env settings
-source ${SCRIPT_DIR}/_setenv.sh
+source ${SCRIPT_DIR}/_setenv-template.sh
 # Load common functions
 source ${SCRIPT_DIR}/_functions.sh
 
@@ -25,6 +25,3 @@ if [ -e ${PLF_SRV_DIR}/current/bin/catalina.sh -a -e /etc/systemd/system/${PLF_N
 else
   echo "[WARN] ${PLF_NAME} not deployed. Cannot be stopped !!!"
 fi
-
-echo "[INFO] $(display_date) Done"
-

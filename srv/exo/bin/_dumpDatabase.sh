@@ -24,6 +24,7 @@ echo "[INFO] $(display_date)"
 
 display_time sudo mysqldump ${DUMP_OPTIONS} ${PLF_DATABASE_NAME} > ${DB_DUMP_WORKING_DIR}/${PLF_DATABASE_NAME}-dumpDataBase.sql
 
-echo "[INFO] Done"
+echo "[INFO] $(display_date)"
+echo "[INFO] Done
 
 popd > /dev/null 2>&1

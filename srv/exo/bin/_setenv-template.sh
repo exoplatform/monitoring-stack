@@ -27,12 +27,16 @@ EXO_ES_SERVER=${ES_SERVER}
 EXO_DB_SERVER=${DB_SERVER}
 EXO_MONGO_SERVER=${MONGO_SERVER}
 EXO_USER=exo
+BACKUP_DIR=/srv/backup
+BACKUP_WORKING_DIR=/var/backup
 #Database Backup
-DB_DUMP_WORKING_DIR=/srv/backup/tmp_db
 PLF_DATABASE_NAME=exo
 #Data Backup
-PLF_BCK_DIR=/srv/backup/tmp_data
 DATA_WORKING_DIR=/srv/data/exo
 #Mongo Backup
-MONGODB_DUMP_WORKING_DIR=/srv/backup/tmp_mongodb
 EXO_CHAT_MONGODB_NAME=chat
+#Elastic Backup
+ELASTIC_WORKING_DIR=/srv/data/
+#DOWNLOAD BACKUP
+DOWNLOAD_BACKUP=false
+

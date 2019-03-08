@@ -11,21 +11,19 @@ source ${SCRIPT_DIR}/_setenv-template.sh
 # Load common functions
 source ${SCRIPT_DIR}/_functions.sh
 
-DUMP_OPTIONS="--single-transaction"
+SCRIPT_DATE=`date "+%Y-%m-%d-%H%M%S"`
 
 # Initialize working directory
-mkdir -p ${BACKUP_WORKING_DIR}/tmp_db
-rm -rf ${BACKUP_WORKING_DIR}/tmp_db/*
-pushd ${BACKUP_WORKING_DIR}/tmp_db > /dev/null 2>&1
+mkdir -p ${BACKUP_WORKING_DIR}/tmp_elastic
+rm -rf ${BACKUP_WORKING_DIR}/tmp_elastic/*
+pushd ${BACKUP_WORKING_DIR}/tmp_elastic > /dev/null 2>&1
 
 echo "[INFO] ======================================="
-echo "[INFO] = Dumping database ${PLF_DATABASE_NAME} into ${BACKUP_WORKING_DIR}/tmp_db ..."
+echo "[INFO] = Compressing ${PLF_NAME} data into ${BACKUP_WORKING_DIR}/tmp_elastic/${PLF_NAME}-ES-${SCRIPT_DATE}.tar.bz2 ..."
 echo "[INFO] ======================================="
 echo "[INFO] $(display_date)"
-
-display_time sudo mysqldump ${DUMP_OPTIONS} ${PLF_DATABASE_NAME} > ${BACKUP_WORKING_DIR}/tmp_db/${PLF_DATABASE_NAME}-dumpDataBase.sql
-
-echo "[INFO] $(display_date)"
-echo "[INFO] Done"
-
+pushd ${BACKUP_WORKING_DIR}/tmp_elastic > /dev/null 2>&1
+display_time tar --directory ${ELASTIC_WORKING_DIR} --use-compress-prog=pbzip2 -cpf ${BACKUP_WORKING_DIR}/tmp_elastic/${PLF_NAME}-ES-${SCRIPT_DATE}.tar.bz2 elasticsearch  
+pushd ${BACKUP_WORKING_DIR}/tmp_elastic > /dev/null 2>&1
 popd > /dev/null 2>&1
+echo "[INFO] Done"

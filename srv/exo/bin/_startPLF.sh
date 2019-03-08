@@ -45,6 +45,13 @@ if [ -e ${PLF_SRV_DIR}/current/bin/catalina.sh -a -e /etc/systemd/system/${PLF_N
   set +e
   while [ true ];
   do
+    if grep -q "ERROR" ${PLF_LOG_DIR}/platform.log; then
+      sudo systemctl stop ${PLF_NAME}
+      echo -n "[ERROR] $(display_date) Startup aborted due to logs errors."
+      kill ${_tailPID}
+      wait ${_tailPID} 2> /dev/null
+      break
+    fi
     if grep -q "Server startup in" ${PLF_LOG_DIR}/platform.log; then
       kill ${_tailPID}
       wait ${_tailPID} 2> /dev/null

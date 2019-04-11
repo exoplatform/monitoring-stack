@@ -13,11 +13,11 @@ delay() {
   if [ $# -lt 2 ]; then
     echo ""
     echo "[ERROR] No enough parameters for function delay !"
-    exit 1;
+    exit 1
   fi
   local _start=$1
   local _end=$2
-  echo "$(( (_end - _start)/3600 )) hour(s) $(( ((_end - _start) % 3600) / 60 )) minute(s) $(( (_end - _start) % 60 )) second(s)"  
+  echo "$(((_end - _start) / 3600)) hour(s) $((((_end - _start) % 3600) / 60)) minute(s) $(((_end - _start) % 60)) second(s)"
 }
 
 # $1 : Message
@@ -27,41 +27,41 @@ display_delay() {
   if [ $# -lt 3 ]; then
     echo ""
     echo "[ERROR] No enough parameters for function display_delay !"
-    exit 1;
+    exit 1
   fi
-  echo "[INFO] $1: $(delay $2 $3) ."  
+  echo "[INFO] $1: $(delay $2 $3) ."
 }
 
 # $1 : Action
-# $2 : Service 
-systemd_action(){
+# $2 : Service
+systemd_action() {
   if [ $# -lt 2 ]; then
     echo ""
     echo "[ERROR] No enough parameters for function systemd_action !"
-    exit 1;
+    exit 1
   fi
   case $1 in
-	start)
-		sudo systemctl start $2
+  start)
+    sudo systemctl start $2
     if $(sudo systemctl -q is-active $2); then
       echo "[INFO] Service $2 started successfuly"
-    else 
+    else
       echo "[ERROR] Service $2 failed to start"
-      exit 1;
+      exit 1
     fi
-		;;
-	stop)
+    ;;
+  stop)
     echo "[INFO] Stop $2 service"
-		sudo systemctl stop $2		
-		;;
-  status)  
+    sudo systemctl stop $2
+    ;;
+  status)
     sudo systemctl status $2
     break
     ;;
-	*)
-		 echo "[ERROR] No systemd action defined !"
-    exit 1;
-		;;
+  *)
+    echo "[ERROR] No systemd action defined !"
+    exit 1
+    ;;
   esac
- 
+
 }

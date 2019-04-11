@@ -2,9 +2,9 @@
 
 # #############################################################################
 # Initialize
-# #############################################################################                                              
+# #############################################################################
 SCRIPT_NAME="${0##*/}"
-SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 SCRIPT_START_TIME=$(date +%s)
 
@@ -29,21 +29,21 @@ ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_dumpElasticsearch.sh
 ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_startElasticsearch.sh
 # Start it
 ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_startPLF.sh
-DOWNTIME_END_TIME=$(date +%s)  
+DOWNTIME_END_TIME=$(date +%s)
 if [ ${DOWNLOAD_BACKUP} ]; then
-    rsync -av ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/* ${BACKUP_DIR} 
-    rsync -av ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_WORKING_DIR}/tmp_db/* ${BACKUP_DIR}
-    rsync -av ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_WORKING_DIR}/tmp_mongo/* ${BACKUP_DIR}
-    rsync -av ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elastic/* ${BACKUP_DIR}
-else 
-    rsync -av ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/* ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_DIR} 
-    rsync -av ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_WORKING_DIR}/tmp_db/* ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_DIR}
-    rsync -av ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_WORKING_DIR}/tmp_mongo/* ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_DIR}
-    rsync -av ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elastic/* ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_DIR}
+  rsync -av ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/* ${BACKUP_DIR}
+  rsync -av ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_WORKING_DIR}/tmp_db/* ${BACKUP_DIR}
+  rsync -av ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_WORKING_DIR}/tmp_mongo/* ${BACKUP_DIR}
+  rsync -av ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elastic/* ${BACKUP_DIR}
+else
+  rsync -av ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/* ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_DIR}
+  rsync -av ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_WORKING_DIR}/tmp_db/* ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_DIR}
+  rsync -av ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_WORKING_DIR}/tmp_mongo/* ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_DIR}
+  rsync -av ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elastic/* ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_DIR}
 fi
 SCRIPT_END_TIME=$(date +%s)
 echo "[INFO] ======================================="
-echo "[INFO] = Backup ended -" `date`
+echo "[INFO] = Backup ended -" $(date)
 echo "[INFO] =--------------------------------------"
 display_delay "= -> Process duration" $SCRIPT_START_TIME $SCRIPT_END_TIME
 echo "[INFO] =--------------------------------------"

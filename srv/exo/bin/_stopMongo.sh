@@ -2,9 +2,9 @@
 
 # #############################################################################
 # Initialize
-# #############################################################################                                              
+# #############################################################################
 SCRIPT_NAME="${0##*/}"
-SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Load env settings
 source ${SCRIPT_DIR}/setenv.sh
@@ -18,7 +18,7 @@ echo "[INFO] ======================================="
 if [ -e /lib/systemd/system/mongod.service ]; then
 
   echo ""
-  ACTION=stop  
+  ACTION=stop
   systemd_action ${ACTION} mongod
 fi
 echo "[INFO] Done"

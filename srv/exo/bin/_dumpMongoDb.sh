@@ -21,14 +21,17 @@ SCRIPT_DATE=$(date "+%Y-%m-%d-%H%M%S")
 
 echo "[INFO] $(display_date)"
 echo "[INFO] ======================================="
-echo "[INFO] = Dumping MongoDB ${EXO_CHAT_MONGODB_NAME} into ${PLF_NAME}-chat-${SCRIPT_DATE}.tar.bz2 ..."
+echo "[INFO] = Dumping MongoDB ${CHAT_DATABASE} into ${PLF_NAME}-${CHAT_DATABASE}-${SCRIPT_DATE}.tar.bz2 ..."
 echo "[INFO] ======================================="
 echo "[INFO] $(display_date)"
-display_time mongodump -o ${BACKUP_WORKING_DIR}/tmp_mongo --db=${EXO_CHAT_MONGODB_NAME}
-echo "[INFO] compress mongo dump into ${BACKUP_WORKING_DIR}/tmp_mongo/${PLF_NAME}-chat-${SCRIPT_DATE}.tar.bz2"
-display_time tar --directory ${BACKUP_WORKING_DIR}/tmp_mongo --use-compress-prog=pbzip2 -cpf ${BACKUP_WORKING_DIR}/tmp_mongo/${PLF_NAME}-chat-${SCRIPT_DATE}.tar.bz2 chat
-echo "[INFO] Suppress ${BACKUP_WORKING_DIR}/tmp_mongo/chat "
-display_time rm -rf ${BACKUP_WORKING_DIR}/tmp_mongo/chat
+
+display_time mongodump -o ${BACKUP_WORKING_DIR}/tmp_mongo --db=${CHAT_DATABASE}
+
+echo "[INFO] Compress mongo dump into ${BACKUP_WORKING_DIR}/tmp_mongo/${PLF_NAME}-${CHAT_DATABASE}-${SCRIPT_DATE}.tar.bz2"
+display_time tar --directory ${BACKUP_WORKING_DIR}/tmp_mongo --use-compress-prog=pbzip2 -cpf ${BACKUP_WORKING_DIR}/tmp_mongo/${PLF_NAME}-chat-${SCRIPT_DATE}.tar.bz2 ${CHAT_DATABASE}
+
+echo "[INFO] Remove ${BACKUP_WORKING_DIR}/tmp_mongo/${CHAT_DATABASE}"
+display_time rm -rf ${BACKUP_WORKING_DIR}/tmp_mongo/${CHAT_DATABASE}
 echo "[INFO] Done"
 echo "[INFO] $(display_date)"
 

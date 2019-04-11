@@ -34,7 +34,7 @@ PLF_DATABASE_NAME=exo
 #Data Backup
 EXO_DATA_DIR=/srv/data/exo
 #Mongo Backup
-EXO_CHAT_MONGODB_NAME=chat
+CHAT_DATABASE=chat
 #Elastic Backup
 ELASTICSEARCH_DATA_DIR=/srv/data/elasticsearch
 #DOWNLOAD BACKUP

@@ -19,16 +19,21 @@ ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopPLF.sh
 
 # Dump data
 ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_dumpData.sh
+
 # Dump database
 ssh ${EXO_USER}@${EXO_DB_SERVER} ${SCRIPT_DIR}/_dumpMysqlDatabase.sh
+
 # Dump MongoDB
 ssh ${EXO_USER}@${EXO_MONGO_SERVER} ${SCRIPT_DIR}/_dumpMongoDb.sh
+
 # Dump Elastic
 ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_stopElasticsearch.sh
 ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_dumpElasticsearch.sh
 ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_startElasticsearch.sh
+
 # Start it
 ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_startPLF.sh
+
 DOWNTIME_END_TIME=$(date +%s)
 if [ ${DOWNLOAD_BACKUP} ]; then
   rsync -av ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/* ${BACKUP_DIR}
@@ -41,7 +46,9 @@ else
   rsync -av ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_WORKING_DIR}/tmp_mongo/* ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_DIR}
   rsync -av ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elastic/* ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_DIR}
 fi
+
 SCRIPT_END_TIME=$(date +%s)
+
 echo "[INFO] ======================================="
 echo "[INFO] = Backup ended -" $(date)
 echo "[INFO] =--------------------------------------"

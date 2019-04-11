@@ -15,6 +15,7 @@ echo "[INFO] ======================================="
 echo "[INFO] Starting MongoDB server on ${HOSTNAME}..."
 echo "[INFO] ======================================="
 echo ""
-ACTION=start
-systemd_action ${ACTION} mongod
+
+systemd_action start mongod
+
 echo "[INFO] Done"

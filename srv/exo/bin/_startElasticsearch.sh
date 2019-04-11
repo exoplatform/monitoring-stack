@@ -15,6 +15,7 @@ echo "[INFO] ======================================="
 echo "[INFO] Starting ElasticSearch server on ${HOSTNAME}..."
 echo "[INFO] ======================================="
 echo ""
-ACTION=start
-systemd_action ${ACTION} elasticsearch
+
+systemd_action start elasticsearch
+
 echo "[INFO] Done"

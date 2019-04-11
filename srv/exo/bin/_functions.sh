@@ -40,22 +40,31 @@ systemd_action() {
     echo "[ERROR] No enough parameters for function systemd_action !"
     exit 1
   fi
-  case $1 in
+  local ACTION=$1
+  local SERVICE=$2
+
+  # check is the service is installed
+  if [ "$(systemctl list-unit-files ${SERVICE}.service --quiet --no-legend | wc -l)" == 0 ]; then
+    echo "[ERROR] Service ${SERVICE} not found"
+    exit 1
+  fi
+
+  case ${ACTION} in
   start)
-    sudo systemctl start $2
-    if $(sudo systemctl -q is-active $2); then
-      echo "[INFO] Service $2 started successfuly"
+    sudo systemctl start ${SERVICE}
+    if $(sudo systemctl -q is-active ${SERVICE}); then
+      echo "[INFO] Service ${SERVICE} started successfuly"
     else
-      echo "[ERROR] Service $2 failed to start"
+      echo "[ERROR] Service ${SERVICE} failed to start"
       exit 1
     fi
     ;;
   stop)
-    echo "[INFO] Stop $2 service"
-    sudo systemctl stop $2
+    echo "[INFO] Stop ${SERVICE} service"
+    sudo systemctl stop ${SERVICE}
     ;;
   status)
-    sudo systemctl status $2
+    sudo systemctl status ${SERVICE}
     break
     ;;
   *)

@@ -15,12 +15,6 @@ echo "[INFO] ======================================="
 echo "[INFO] Stopping ElasticSearch server on ${HOSTNAME}..."
 echo "[INFO] ======================================="
 
-if [ -e /usr/lib/systemd/system/elasticsearch.service ]; then
+systemd_action stop elasticsearch
 
-  echo ""
-  ACTION=stop
-  systemd_action ${ACTION} elasticsearch
-else
-  echo "[WARN] $(display_date) ElasticSearch not deployed. Cannot be stopped !!!"
-fi
 echo "[INFO] Done"

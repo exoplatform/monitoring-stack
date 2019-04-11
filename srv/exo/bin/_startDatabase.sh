@@ -15,6 +15,7 @@ echo "[INFO] ======================================="
 echo "[INFO] Starting Database server on ${HOSTNAME}..."
 echo "[INFO] ======================================="
 echo ""
-ACTION=start
-systemd_action ${ACTION} mysql
+
+systemd_action start mysql
+
 echo "[INFO] Done"

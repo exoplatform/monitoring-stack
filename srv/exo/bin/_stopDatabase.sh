@@ -15,11 +15,6 @@ echo "[INFO] ======================================="
 echo "[INFO] Stopping Database server on ${HOSTNAME}..."
 echo "[INFO] ======================================="
 
-if [ -e /lib/systemd/system/mysql.service ]; then
-  echo ""
-  ACTION=stop
-  systemd_action ${ACTION} mysql
-else
-  echo "[WARN] $(display_date) Database not deployed. Cannot be stopped !!!"
-fi
+systemd_action stop mysql
+
 echo "[INFO] Done"

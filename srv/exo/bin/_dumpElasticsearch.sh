@@ -14,16 +14,18 @@ source ${SCRIPT_DIR}/_functions.sh
 SCRIPT_DATE=$(date "+%Y-%m-%d-%H%M%S")
 
 # Initialize working directory
-mkdir -p ${BACKUP_WORKING_DIR}/tmp_elastic
-rm -rf ${BACKUP_WORKING_DIR}/tmp_elastic/*
-pushd ${BACKUP_WORKING_DIR}/tmp_elastic >/dev/null 2>&1
+mkdir -p ${BACKUP_WORKING_DIR}/tmp_elasticsearch
+rm -rf ${BACKUP_WORKING_DIR}/tmp_elasticsearch/*
+pushd ${BACKUP_WORKING_DIR}/tmp_elasticsearch >/dev/null 2>&1
 
 echo "[INFO] ======================================="
-echo "[INFO] = Compressing ${PLF_NAME} data into ${BACKUP_WORKING_DIR}/tmp_elastic/${PLF_NAME}-ES-${SCRIPT_DATE}.tar.bz2 ..."
+echo "[INFO] = Compressing ${PLF_NAME} data into ${BACKUP_WORKING_DIR}/tmp_elastic/${PLF_NAME}-es-${SCRIPT_DATE}.tar.bz2 ..."
 echo "[INFO] ======================================="
 echo "[INFO] $(display_date)"
+
 pushd ${BACKUP_WORKING_DIR}/tmp_elastic >/dev/null 2>&1
-display_time tar --directory ${ELASTIC_WORKING_DIR} --use-compress-prog=pbzip2 -cpf ${BACKUP_WORKING_DIR}/tmp_elastic/${PLF_NAME}-es-${SCRIPT_DATE}.tar.bz2 elasticsearch
-pushd ${BACKUP_WORKING_DIR}/tmp_elastic >/dev/null 2>&1
+
+display_time tar --directory $(dirname ${ELASTICSEARCH_DATA_DIR}) --use-compress-prog=pbzip2 -cpf ${BACKUP_WORKING_DIR}/tmp_elasticsearch/${PLF_NAME}-es-${SCRIPT_DATE}.tar.bz2 $(basename ${ELASTICSEARCH_DATA_DIR})
+
 popd >/dev/null 2>&1
 echo "[INFO] Done"

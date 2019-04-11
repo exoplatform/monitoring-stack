@@ -39,12 +39,12 @@ if [ ${DOWNLOAD_BACKUP} ]; then
   rsync -av ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/* ${BACKUP_DIR}
   rsync -av ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_WORKING_DIR}/tmp_db/* ${BACKUP_DIR}
   rsync -av ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_WORKING_DIR}/tmp_mongo/* ${BACKUP_DIR}
-  rsync -av ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elastic/* ${BACKUP_DIR}
+  rsync -av ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elasticsearch/* ${BACKUP_DIR}
 else
   rsync -av ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/* ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_DIR}
   rsync -av ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_WORKING_DIR}/tmp_db/* ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_DIR}
   rsync -av ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_WORKING_DIR}/tmp_mongo/* ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_DIR}
-  rsync -av ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elastic/* ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_DIR}
+  rsync -av ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elasticsearch/* ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_DIR}
 fi
 
 SCRIPT_END_TIME=$(date +%s)

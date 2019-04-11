@@ -36,6 +36,6 @@ EXO_DATA_DIR=/srv/data/exo
 #Mongo Backup
 EXO_CHAT_MONGODB_NAME=chat
 #Elastic Backup
-ELASTIC_WORKING_DIR=/srv/data/
+ELASTICSEARCH_DATA_DIR=/srv/data/elasticsearch
 #DOWNLOAD BACKUP
 DOWNLOAD_BACKUP=false

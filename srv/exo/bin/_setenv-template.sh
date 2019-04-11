@@ -30,7 +30,7 @@ EXO_USER=exo
 BACKUP_DIR=/srv/backup
 BACKUP_WORKING_DIR=/var/backup
 #Database Backup
-PLF_DATABASE_NAME=exo
+EXO_DATABASE=exo
 #Data Backup
 EXO_DATA_DIR=/srv/data/exo
 #Mongo Backup

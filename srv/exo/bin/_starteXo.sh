@@ -16,15 +16,8 @@ echo "[INFO] = $(display_date) Start PLF server on ${HOSTNAME} ..."
 echo "[INFO] ======================================="
 if [ -e ${PLF_SRV_DIR}/current/bin/catalina.sh -a -e /etc/systemd/system/${PLF_NAME}.service ]; then
 
-  echo ""
-  ACTION=start
-  set +u
-  if [ -n "${EXO_DEBUG}" ]; then
-    ACTION=debug
-  fi
-  set -u
+  systemd_action start ${PLF_NAME}
 
-  systemd_action ${ACTION} ${PLF_NAME}
   echo -n "[INFO] $(display_date) Waiting for logs availability ."
   while [ true ]; do
     if [ -e "${PLF_LOG_DIR}/platform.log" ]; then
@@ -42,18 +35,12 @@ if [ -e ${PLF_SRV_DIR}/current/bin/catalina.sh -a -e /etc/systemd/system/${PLF_N
   # Check for the end of startup
   set +e
   while [ true ]; do
-    if grep -q "ERROR" ${PLF_LOG_DIR}/platform.log; then
-      systemd_action stop ${PLF_NAME}
-      echo -n "[ERROR] $(display_date) Startup aborted due to logs errors."
-      kill ${_tailPID}
-      wait ${_tailPID} 2>/dev/null
-      break
-    fi
     if grep -q "Server startup in" ${PLF_LOG_DIR}/platform.log; then
       kill ${_tailPID}
       wait ${_tailPID} 2>/dev/null
       break
     fi
+    sleep .5
   done
   set -e
 

@@ -14,21 +14,24 @@ source ${SCRIPT_DIR}/setenv.sh
 source ${SCRIPT_DIR}/_functions.sh
 
 DOWNTIME_START_TIME=$(date +%s)
+
+BACKUP_DATE=$(date "+%Y-%m-%d-%H%M%S")
+
 # Stop it
 ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopPLF.sh
 
 # Dump data
-ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_dumpData.sh
+ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_dumpData.sh ${BACKUP_DATE}
 
 # Dump database
-ssh ${EXO_USER}@${EXO_DB_SERVER} ${SCRIPT_DIR}/_dumpMysqlDatabase.sh
+ssh ${EXO_USER}@${EXO_DB_SERVER} ${SCRIPT_DIR}/_dumpMysqlDatabase.sh ${BACKUP_DATE}
 
 # Dump MongoDB
-ssh ${EXO_USER}@${EXO_MONGO_SERVER} ${SCRIPT_DIR}/_dumpMongoDb.sh
+ssh ${EXO_USER}@${EXO_MONGO_SERVER} ${SCRIPT_DIR}/_dumpMongoDb.sh ${BACKUP_DATE}
 
 # Dump Elastic
 ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_stopElasticsearch.sh
-ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_dumpElasticsearch.sh
+ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_dumpElasticsearch.sh ${BACKUP_DATE}
 ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_startElasticsearch.sh
 
 # Start it

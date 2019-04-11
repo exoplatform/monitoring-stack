@@ -17,9 +17,10 @@ DUMP_OPTIONS="--single-transaction"
 mkdir -p ${BACKUP_WORKING_DIR}/tmp_db
 rm -rf ${BACKUP_WORKING_DIR}/tmp_db/*
 pushd ${BACKUP_WORKING_DIR}/tmp_db >/dev/null 2>&1
-SCRIPT_DATE=$(date "+%Y-%m-%d-%H%M%S")
 
-TARGET_NAME="${PLF_NAME}-db-${SCRIPT_DATE}.sql.bz2"
+BACKUP_DATE=${1:-$(date "+%Y-%m-%d-%H%M%S")}
+
+TARGET_NAME="${PLF_NAME}-db-${BACKUP_DATE}.sql.bz2"
 
 echo "[INFO] ======================================="
 echo "[INFO] = Dumping database ${EXO_DATABASE} into ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME} ..."

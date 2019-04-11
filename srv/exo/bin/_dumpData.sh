@@ -22,8 +22,10 @@ echo "[INFO] ======================================="
 echo "[INFO] = Compressing ${PLF_NAME} data into ${BACKUP_WORKING_DIR}/tmp_data/${PLF_NAME}-data-${SCRIPT_DATE}.tar.bz2 ..."
 echo "[INFO] ======================================="
 echo "[INFO] $(display_date)"
+
 pushd ${BACKUP_WORKING_DIR}/tmp_data >/dev/null 2>&1
-display_time tar --directory ${DATA_WORKING_DIR} --use-compress-prog=pbzip2 -cpf ${BACKUP_WORKING_DIR}/tmp_data/${PLF_NAME}-data-${SCRIPT_DATE}.tar.bz2 data
-pushd ${BACKUP_WORKING_DIR}/tmp_data >/dev/null 2>&1
+
+display_time tar --directory $(dirname ${EXO_DATA_DIR}) --use-compress-prog=pbzip2 -cpf ${BACKUP_WORKING_DIR}/tmp_data/${PLF_NAME}-data-${SCRIPT_DATE}.tar.bz2 $(basename ${EXO_DATA_DIR})
+
 popd >/dev/null 2>&1
 echo "[INFO] Done"

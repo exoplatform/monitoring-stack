@@ -32,7 +32,7 @@ BACKUP_WORKING_DIR=/var/backup
 #Database Backup
 PLF_DATABASE_NAME=exo
 #Data Backup
-DATA_WORKING_DIR=/srv/data/exo
+EXO_DATA_DIR=/srv/data/exo
 #Mongo Backup
 EXO_CHAT_MONGODB_NAME=chat
 #Elastic Backup

@@ -19,6 +19,6 @@ if [ -e /lib/systemd/system/mongod.service ]; then
 
   echo ""
   ACTION=stop  
-  sudo systemctl ${ACTION} mongod
+  systemd_action ${ACTION} mongod
 fi
 echo "[INFO] Done"

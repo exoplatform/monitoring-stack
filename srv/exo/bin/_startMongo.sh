@@ -16,5 +16,5 @@ echo "[INFO] Starting MongoDB server on ${HOSTNAME}..."
 echo "[INFO] ======================================="
 echo ""
 ACTION=start  
-sudo systemctl ${ACTION} mongod
+systemd_action ${ACTION} mongod
 echo "[INFO] Done"

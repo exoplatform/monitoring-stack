@@ -31,3 +31,36 @@ display_delay() {
   fi
   echo "[INFO] $1: $(delay $2 $3) ."  
 }
+
+# $1 : Action
+# $2 : Service 
+systemd_action(){
+  if [ $# -lt 2 ]; then
+    echo ""
+    echo "[ERROR] No enough parameters for function systemd_action !"
+    exit 1;
+  fi
+  case $1 in
+	start)
+		sudo systemctl start $2
+    if $(sudo systemctl -q is-active $2); then
+      echo "[INFO] Service $2 started successfuly"
+    else 
+      echo "[ERROR] Service $2 failed to start"
+      exit 1;
+    fi
+		;;
+	stop)
+		sudo systemctl stop $2		
+		;;
+  status)  
+    sudo systemctl status $2
+    break
+    ;;
+	*)
+		 echo "[ERROR] No systemd action defined !"
+    exit 1;
+		;;
+  esac
+ 
+}

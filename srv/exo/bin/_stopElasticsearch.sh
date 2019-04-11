@@ -19,7 +19,7 @@ if [ -e /usr/lib/systemd/system/elasticsearch.service ]; then
 
   echo ""
   ACTION=stop  
-  sudo systemctl ${ACTION} elasticsearch
+  systemd_action ${ACTION} elasticsearch
 else
   echo "[WARN] $(display_date) ElasticSearch not deployed. Cannot be stopped !!!"
 fi

@@ -25,7 +25,7 @@ if [ -e ${PLF_SRV_DIR}/current/bin/catalina.sh -a -e /etc/systemd/system/${PLF_N
   fi
   set -u
 
-  sudo systemctl ${ACTION} ${PLF_NAME} 
+  systemd_action ${ACTION} ${PLF_NAME} 
   echo -n "[INFO] $(display_date) Waiting for logs availability ."
   while [ true ];
   do
@@ -46,7 +46,7 @@ if [ -e ${PLF_SRV_DIR}/current/bin/catalina.sh -a -e /etc/systemd/system/${PLF_N
   while [ true ];
   do
     if grep -q "ERROR" ${PLF_LOG_DIR}/platform.log; then
-      sudo systemctl stop ${PLF_NAME}
+      systemd_action stop ${PLF_NAME}
       echo -n "[ERROR] $(display_date) Startup aborted due to logs errors."
       kill ${_tailPID}
       wait ${_tailPID} 2> /dev/null

@@ -18,7 +18,7 @@ echo "[INFO] ======================================="
 if [ -e /lib/systemd/system/mysql.service ]; then
   echo ""
   ACTION=stop  
-  sudo systemctl ${ACTION} mysql
+  systemd_action ${ACTION} mysql
 else
   echo "[WARN] $(display_date) Database not deployed. Cannot be stopped !!!"
 fi

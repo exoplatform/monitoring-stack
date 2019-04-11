@@ -16,5 +16,5 @@ echo "[INFO] Starting ElasticSearch server on ${HOSTNAME}..."
 echo "[INFO] ======================================="
 echo ""
 ACTION=start  
-sudo systemctl ${ACTION} elasticsearch
+systemd_action ${ACTION} elasticsearch
 echo "[INFO] Done"

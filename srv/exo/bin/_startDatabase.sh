@@ -16,5 +16,5 @@ echo "[INFO] Starting Database server on ${HOSTNAME}..."
 echo "[INFO] ======================================="
 echo ""
 ACTION=start  
-sudo systemctl ${ACTION} mysql
+systemd_action ${ACTION} mysql
 echo "[INFO] Done"

@@ -51,6 +51,7 @@ systemd_action(){
     fi
 		;;
 	stop)
+    echo "[INFO] Stop $2 service"
 		sudo systemctl stop $2		
 		;;
   status)  

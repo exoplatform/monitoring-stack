@@ -13,17 +13,12 @@ source ${SCRIPT_DIR}/_functions.sh
 
 DUMP_OPTIONS="--single-transaction"
 
-# Initialize working directory
-mkdir -p ${BACKUP_WORKING_DIR}/tmp_db
-rm -rf ${BACKUP_WORKING_DIR}/tmp_db/*
-pushd ${BACKUP_WORKING_DIR}/tmp_db >/dev/null 2>&1
-
 BACKUP_DATE=${1:-$(date "+%Y-%m-%d-%H%M%S")}
 
 TARGET_NAME="${PLF_NAME}-db-${BACKUP_DATE}.sql.bz2"
 
 echo "[INFO] ======================================="
-echo "[INFO] = Dumping database ${EXO_DATABASE} into ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME} ..."
+echo "[INFO] = restoring database ${EXO_DATABASE} into ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME} ..."
 echo "[INFO] ======================================="
 echo "[INFO] $(display_date)"
 display_time sudo bunzip2 < ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME} | mysql

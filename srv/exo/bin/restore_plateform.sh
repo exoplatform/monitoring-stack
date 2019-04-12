@@ -5,7 +5,6 @@
 # #############################################################################
 SCRIPT_NAME="${0##*/}"
 SCRIPT_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BACKUP_DATE=$1
 
 SCRIPT_START_TIME=$(date +%s)
 
@@ -20,7 +19,7 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-local BACKUP_DATE=$1
+BACKUP_DATE=$1
 
 if [ ${DOWNLOAD_BACKUP} ]; then
   rsync -av ${BACKUP_DIR}/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/

@@ -15,7 +15,7 @@ BACKUP_DATE=${1:-$(date "+%Y-%m-%d-%H%M%S")}
 
 # Initialize working directory
 rm -rf ${EXO_DATA_DIR}/*
-pushd ${EXO_DATA_DIR}/* >/dev/null 2>&1
+pushd ${EXO_DATA_DIR} >/dev/null 2>&1
 
 echo "[INFO] ======================================="
 echo "[INFO] = Uncompressing ${BACKUP_WORKING_DIR}/tmp_data/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 into ${EXO_DATA_DIR} ..."

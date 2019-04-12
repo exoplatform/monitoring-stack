@@ -15,8 +15,8 @@ echo ""
 echo "[INFO] ======================================="
 echo "[INFO] = $(display_date) Start ${PLF_NAME} server on ${HOSTNAME} ..."
 echo "[INFO] ======================================="
-ssh ${EXO_USER}@${EXO_DB_SERVER} ${SCRIPT_DIR}/_startDataBase.sh
+ssh ${EXO_USER}@${EXO_DB_SERVER} ${SCRIPT_DIR}/_startDatabase.sh
 ssh ${EXO_USER}@${EXO_MONGO_SERVER} ${SCRIPT_DIR}/_startMongo.sh
-ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_startElasticSearch.sh
-ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_startPLF.sh
+ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_startElasticsearch.sh
+ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_starteXo.sh
 echo "[INFO] $(display_date) Done"

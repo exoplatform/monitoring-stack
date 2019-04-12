@@ -36,7 +36,7 @@ fi
 DOWNTIME_START_TIME=$(date +%s)
 
 # Stop it
-ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopPLF.sh
+ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopeXo.sh
 
 # restore data
 ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_restoreData.sh ${BACKUP_DATE}
@@ -53,7 +53,7 @@ ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_restoreElasticsearch.sh ${BACKUP
 ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_startElasticsearch.sh
 
 # Start it
-ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_startPLF.sh
+ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_starteXo.sh
 
 DOWNTIME_END_TIME=$(date +%s)
 SCRIPT_END_TIME=$(date +%s)

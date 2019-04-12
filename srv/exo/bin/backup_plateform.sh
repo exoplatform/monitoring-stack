@@ -18,7 +18,7 @@ DOWNTIME_START_TIME=$(date +%s)
 BACKUP_DATE=$(date "+%Y-%m-%d-%H%M%S")
 
 # Stop it
-ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopPLF.sh
+ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopeXo.sh
 
 # Dump data
 ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_dumpData.sh ${BACKUP_DATE}
@@ -35,7 +35,7 @@ ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_dumpElasticsearch.sh ${BACKUP_DA
 ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_startElasticsearch.sh
 
 # Start it
-ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_startPLF.sh
+ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_starteXo.sh
 
 DOWNTIME_END_TIME=$(date +%s)
 if [ ${DOWNLOAD_BACKUP} ]; then

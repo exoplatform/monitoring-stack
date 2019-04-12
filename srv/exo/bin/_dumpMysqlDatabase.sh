@@ -11,7 +11,7 @@ source ${SCRIPT_DIR}/setenv.sh
 # Load common functions
 source ${SCRIPT_DIR}/_functions.sh
 
-DUMP_OPTIONS="--single-transaction --add-drop-database "
+DUMP_OPTIONS="--single-transaction --add-drop-table"
 
 # Initialize working directory
 mkdir -p ${BACKUP_WORKING_DIR}/tmp_db

@@ -12,7 +12,7 @@ source ${SCRIPT_DIR}/setenv.sh
 source ${SCRIPT_DIR}/_functions.sh
 
 echo "[INFO] ======================================="
-echo "[INFO] Starting ElasticSearch server on ${HOSTNAME}..."
+echo "[INFO] Starting Elasticsearch server on ${HOSTNAME}..."
 echo "[INFO] ======================================="
 echo ""
 

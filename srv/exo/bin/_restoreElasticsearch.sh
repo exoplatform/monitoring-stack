@@ -18,7 +18,7 @@ rm -rf ${ELASTICSEARCH_DATA_DIR}/*
 pushd ${ELASTICSEARCH_DATA_DIR}/ >/dev/null 2>&1
 
 echo "[INFO] ======================================="
-echo "[INFO] = UnCompressing ${BACKUP_WORKING_DIR}/tmp_elastic/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 into ${ELASTICSEARCH_DATA_DIR}  ..."
+echo "[INFO] = Uncompressing ${BACKUP_WORKING_DIR}/tmp_elastic/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 into ${ELASTICSEARCH_DATA_DIR}  ..."
 echo "[INFO] ======================================="
 echo "[INFO] $(display_date)"
 

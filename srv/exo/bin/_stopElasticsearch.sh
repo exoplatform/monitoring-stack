@@ -12,7 +12,7 @@ source ${SCRIPT_DIR}/setenv.sh
 source ${SCRIPT_DIR}/_functions.sh
 
 echo "[INFO] ======================================="
-echo "[INFO] Stopping ElasticSearch server on ${HOSTNAME}..."
+echo "[INFO] Stopping Elasticsearch server on ${HOSTNAME}..."
 echo "[INFO] ======================================="
 
 systemd_action stop elasticsearch

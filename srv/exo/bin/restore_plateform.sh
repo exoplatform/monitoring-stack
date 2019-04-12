@@ -5,6 +5,7 @@
 # #############################################################################
 SCRIPT_NAME="${0##*/}"
 SCRIPT_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKUP_DATE=$1
 
 SCRIPT_START_TIME=$(date +%s)
 
@@ -12,6 +13,14 @@ SCRIPT_START_TIME=$(date +%s)
 source ${SCRIPT_DIR}/setenv.sh
 # Load common functions
 source ${SCRIPT_DIR}/_functions.sh
+
+if [ $# -lt 1 ]; then
+  echo ""
+  echo "[ERROR] Need backup date to proceede to the restore !"
+  exit 1
+fi
+
+local BACKUP_DATE=$1
 
 if [ ${DOWNLOAD_BACKUP} ]; then
   rsync -av ${BACKUP_DIR}/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/
@@ -26,8 +35,6 @@ else
 fi
 
 DOWNTIME_START_TIME=$(date +%s)
-
-BACKUP_DATE=$(date "+%Y-%m-%d-%H%M%S")
 
 # Stop it
 ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_stopPLF.sh

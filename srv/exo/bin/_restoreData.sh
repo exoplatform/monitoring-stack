@@ -14,16 +14,48 @@ source ${SCRIPT_DIR}/_functions.sh
 BACKUP_DATE=${1:-$(date "+%Y-%m-%d-%H%M%S")}
 
 # Initialize working directory
-rm -rf ${EXO_DATA_DIR}/*
 pushd ${EXO_DATA_DIR} >/dev/null 2>&1
 
+ARCHIVE="${BACKUP_WORKING_DIR}/tmp_data/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2"
+
 echo "[INFO] ======================================="
-echo "[INFO] = Uncompressing ${BACKUP_WORKING_DIR}/tmp_data/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 into ${EXO_DATA_DIR} ..."
+echo "[INFO] Restoring data from ${ARCHIVE}"
 echo "[INFO] ======================================="
 echo "[INFO] $(display_date)"
 
+if ${BACKUP_ON_RESTORE}; then
+  echo "[INFO] Saving current data ..."
+
+  if [ -e ${EXO_DATA_DIR}/data.beforerestore ]; then
+    mv -v ${EXO_DATA_DIR}/data.beforerestore ${EXO_DATA_DIR}/data.beforerestore-old
+    # Can be long process in background
+    rm -rf ${EXO_DATA_DIR}/data.beforerestore-old &
+  fi
+
+  if [ -e ${EXO_DATA_DIR}/data ]; then
+    mv -v ${EXO_DATA_DIR}/data ${EXO_DATA_DIR}/data.beforerestore
+  fi
+else
+  echo "[INFO] Removing current data ..."
+  if [ -e ${EXO_DATA_DIR}/data ]; then
+    mv -v ${EXO_DATA_DIR}/data ${EXO_DATA_DIR}/data.beforerestore
+    # Can be long process in background
+    rm -rf ${EXO_DATA_DIR}/data.beforerestore &
+  fi
+fi
+
 pushd ${BACKUP_WORKING_DIR}/tmp_data >/dev/null 2>&1
 
-display_time tar xvf ${BACKUP_WORKING_DIR}/tmp_data/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 -C ${EXO_DATA_DIR}
+echo "[INFO] = Uncompressing ${ARCHIVE} into ${EXO_DATA_DIR} ..."
+display_time tar xf ${ARCHIVE} -C ${EXO_DATA_DIR}
+echo "[INFO] $(display_date)"
+echo "[INFO] Done"
+
+rm -v ${ARCHIVE}
+
+echo "[INFO] = waiting for cleanup to end ..."
+# be sure all the cleanup processes are finished
+wait 
+
 popd >/dev/null 2>&1
 echo "[INFO] Done"

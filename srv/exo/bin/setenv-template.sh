@@ -31,7 +31,7 @@ BACKUP_DIR=/srv/backup
 BACKUP_WORKING_DIR=/var/backup
 #Database Backup
 EXO_DATABASE=exo
-#Data Backup
+# The directory where the eXo "data" directory is present
 EXO_DATA_DIR=/srv/data/exo
 #Mongo Backup
 CHAT_DATABASE=chat

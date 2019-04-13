@@ -16,6 +16,8 @@ echo "[INFO] = $(display_date) Start PLF server on ${HOSTNAME} ..."
 echo "[INFO] ======================================="
 if [ -e ${PLF_SRV_DIR}/current/bin/catalina.sh -a -e /etc/systemd/system/${PLF_NAME}.service ]; then
 
+  PREVIOUS_START_COUNT=$(grep -c "Server startup in" ${PLF_LOG_DIR}/platform.log)
+
   systemd_action start ${PLF_NAME}
 
   echo -n "[INFO] $(display_date) Waiting for logs availability ."
@@ -35,7 +37,7 @@ if [ -e ${PLF_SRV_DIR}/current/bin/catalina.sh -a -e /etc/systemd/system/${PLF_N
   # Check for the end of startup
   set +e
   while [ true ]; do
-    if grep -q "Server startup in" ${PLF_LOG_DIR}/platform.log; then
+    if [ $(grep -c "Server startup in" ${PLF_LOG_DIR}/platform.log) -gt ${PREVIOUS_START_COUNT} ] ; then
       kill ${_tailPID}
       wait ${_tailPID} 2>/dev/null
       break

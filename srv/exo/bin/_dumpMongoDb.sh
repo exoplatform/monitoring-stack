@@ -35,6 +35,7 @@ display_time tar --directory ${BACKUP_WORKING_DIR}/tmp_mongo --use-compress-prog
 
 echo "[INFO] Remove ${BACKUP_WORKING_DIR}/tmp_mongo/${CHAT_DATABASE}"
 display_time rm -rf ${BACKUP_WORKING_DIR}/tmp_mongo/${CHAT_DATABASE}
+
 echo "[INFO] Done"
 echo "[INFO] $(display_date)"
 

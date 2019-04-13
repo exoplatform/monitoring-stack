@@ -1,0 +1,2 @@
+Cmnd_Alias      EXO_CMD  = /bin/systemctl start mongod,/bin/systemctl stop mongod,/bin/systemctl status mongod
+exo ALL=(ALL) NOPASSWD: EXO_CMD

@@ -1,0 +1,3 @@
+Cmnd_Alias      EXO_CMD  = /bin/systemctl start elasticsearch,/bin/systemctl stop elasticsearch,/bin/systemctl status elasticsearch
+exo ALL=(ALL) NOPASSWD: EXO_CMD
+exo ALL=(elasticsearch) NOPASSWD: ALL

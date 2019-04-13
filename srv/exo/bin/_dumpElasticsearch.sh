@@ -19,11 +19,11 @@ rm -rf ${BACKUP_WORKING_DIR}/tmp_elasticsearch/*
 pushd ${BACKUP_WORKING_DIR}/tmp_elasticsearch >/dev/null 2>&1
 
 echo "[INFO] ======================================="
-echo "[INFO] = Compressing ${PLF_NAME} data into ${BACKUP_WORKING_DIR}/tmp_elastic/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 ..."
+echo "[INFO] = Compressing ${PLF_NAME} data into ${BACKUP_WORKING_DIR}/tmp_elasticsearch/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 ..."
 echo "[INFO] ======================================="
 echo "[INFO] $(display_date)"
 
-pushd ${BACKUP_WORKING_DIR}/tmp_elastic >/dev/null 2>&1
+pushd ${BACKUP_WORKING_DIR}/tmp_elasticsearch >/dev/null 2>&1
 
 display_time tar --directory $(dirname ${ELASTICSEARCH_DATA_DIR}) --use-compress-prog=pbzip2 -cpf ${BACKUP_WORKING_DIR}/tmp_elasticsearch/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 $(basename ${ELASTICSEARCH_DATA_DIR})
 

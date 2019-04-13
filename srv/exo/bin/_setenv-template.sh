@@ -39,3 +39,5 @@ CHAT_DATABASE=chat
 ELASTICSEARCH_DATA_DIR=/srv/data/elasticsearch
 #DOWNLOAD BACKUP
 DOWNLOAD_BACKUP=false
+# Backup the current data before restoring
+BACKUP_ON_RESTORE=true

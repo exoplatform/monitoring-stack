@@ -37,7 +37,7 @@ EXO_DATA_DIR=/srv/data/exo
 CHAT_DATABASE=chat
 #Elastic Backup
 ELASTICSEARCH_DATA_DIR=/srv/data/elasticsearch
-#DOWNLOAD BACKUP
-DOWNLOAD_BACKUP=false
+# Retrieve the backup on the server launching the restore
+REMOTE_BACKUP=true
 # Backup the current data before restoring
 BACKUP_ON_RESTORE=true

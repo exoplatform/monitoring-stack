@@ -21,10 +21,23 @@ echo "[INFO] ======================================="
 echo "[INFO] = restoring database ${EXO_DATABASE} into ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME} ..."
 echo "[INFO] ======================================="
 echo "[INFO] $(display_date)"
-display_time sudo bunzip2 < ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME} | mysql
-echo "[INFO] Remove ${BACKUP_WORKING_DIR}/tmp_db/ content"
-display_time rm -rf ${BACKUP_WORKING_DIR}/tmp_db/*
-echo "[INFO] Done"
+
+if ${BACKUP_ON_RESTORE}; then
+  BACKUP_FILE="${BACKUP_WORKING_DIR}/tmp_db/mysql-old.sql.bz2"
+  echo "[INFO] Save current database in ${BACKUP_FILE}"
+  
+  DUMP_OPTIONS="--single-transaction --add-drop-table"
+
+  display_time sudo mysqldump ${DUMP_OPTIONS} ${EXO_DATABASE} | pbzip2 >${BACKUP_FILE}
+ 
+  echo "[INFO] $(display_date)"
+fi
+
+display_time pbzip2 -d -c ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME} | mysql ${EXO_DATABASE}
+
+echo "[INFO] Clean ${BACKUP_WORKING_DIR}/tmp_db/ content"
+display_time rm -rf ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME}
+
 echo "[INFO] $(display_date)"
 echo "[INFO] Done"
 

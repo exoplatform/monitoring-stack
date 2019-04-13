@@ -26,7 +26,9 @@ echo "[INFO] ======================================="
 echo "[INFO] = Dumping database ${EXO_DATABASE} into ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME} ..."
 echo "[INFO] ======================================="
 echo "[INFO] $(display_date)"
-display_time sudo mysqldump ${DUMP_OPTIONS} ${EXO_DATABASE} | pbzip2 >${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME}
+
+display_time mysqldump ${DUMP_OPTIONS} ${EXO_DATABASE} | pbzip2 >${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME}
+
 echo "[INFO] Done"
 
 popd >/dev/null 2>&1

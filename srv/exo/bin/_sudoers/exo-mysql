@@ -1,2 +1,2 @@
-Cmnd_Alias      EXO_CMD  = /bin/systemctl start mysql, /bin/systemctl stop mysql, /bin/systemctl status mysql
+Cmnd_Alias      EXO_CMD  = /bin/systemctl start mysql, /bin/systemctl stop mysql, /bin/systemctl status mysql, /bin/systemctl -q is-active mysql
 exo ALL=(ALL) NOPASSWD: EXO_CMD

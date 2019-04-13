@@ -1,0 +1,2 @@
+Cmnd_Alias      EXO_CMD  = /bin/systemctl stop exo,/bin/systemctl start exo,/bin/systemctl status exo, /bin/systemctl -q is-active exo
+exo ALL=(ALL) NOPASSWD: EXO_CMD

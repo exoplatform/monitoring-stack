@@ -19,4 +19,5 @@ ssh ${EXO_USER}@${EXO_DB_SERVER} ${SCRIPT_DIR}/_startDatabase.sh
 ssh ${EXO_USER}@${EXO_MONGO_SERVER} ${SCRIPT_DIR}/_startMongo.sh
 ssh ${EXO_USER}@${EXO_ES_SERVER} ${SCRIPT_DIR}/_startElasticsearch.sh
 ssh ${EXO_USER}@${EXO_PLF_SERVER} ${SCRIPT_DIR}/_starteXo.sh
-echo "[INFO] $(display_date) Done"
+echo "[INFO] $(display_date)"
+echo "[INFO] Plateform started"

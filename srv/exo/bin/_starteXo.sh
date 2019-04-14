@@ -16,7 +16,10 @@ echo "[INFO] = $(display_date) Start PLF server on ${HOSTNAME} ..."
 echo "[INFO] ======================================="
 if [ -e ${PLF_SRV_DIR}/current/bin/catalina.sh -a -e /etc/systemd/system/${PLF_NAME}.service ]; then
 
+  # if no previous startup was found grep return 1, so set -e is needed
+  set +e 
   PREVIOUS_START_COUNT=$(grep -c "Server startup in" ${PLF_LOG_DIR}/platform.log)
+  set -e
 
   systemd_action start ${PLF_NAME}
 

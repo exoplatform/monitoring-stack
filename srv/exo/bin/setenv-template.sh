@@ -41,3 +41,5 @@ ELASTICSEARCH_DATA_DIR=/srv/data/elasticsearch
 REMOTE_BACKUP=true
 # Backup the current data before restoring
 BACKUP_ON_RESTORE=true
+# Number of backups to keep
+BACKUP_RETENTION=7

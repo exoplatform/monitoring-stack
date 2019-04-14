@@ -50,6 +50,8 @@ else
   rsync -av ${BACKUP_WORKING_DIR}/tmp_elasticsearch/* ${BACKUP_DIR}
 fi
 
+${SCRIPT_DIR}/_cleanBackups.sh
+
 SCRIPT_END_TIME=$(date +%s)
 
 echo "[INFO] ======================================="

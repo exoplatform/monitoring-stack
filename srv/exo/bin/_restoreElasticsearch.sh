@@ -32,7 +32,6 @@ else
   sudo -u elasticsearch rm -rf ${ELASTICSEARCH_DATA_DIR}/nodes ${ELASTICSEARCH_DATA_DIR}/nodes
 fi
 
-
 echo "[INFO] = Uncompressing ${BACKUP_WORKING_DIR}/tmp_elasticsearch/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 into ${ELASTICSEARCH_DATA_DIR}  ..."
 echo "[INFO] $(display_date)"
 display_time sudo -u elasticsearch tar xf ${BACKUP_WORKING_DIR}/tmp_elasticsearch/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 -C ${ELASTICSEARCH_DATA_DIR}/..

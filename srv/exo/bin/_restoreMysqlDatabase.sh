@@ -18,7 +18,7 @@ BACKUP_DATE=${1:-$(date "+%Y-%m-%d-%H%M%S")}
 TARGET_NAME="${PLF_NAME}-db-${BACKUP_DATE}.sql.bz2"
 
 echo "[INFO] ======================================="
-echo "[INFO] = restoring database ${EXO_DATABASE} into ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME} ..."
+echo "[INFO] = restoring database ${EXO_DATABASE} from ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME} ..."
 echo "[INFO] ======================================="
 echo "[INFO] $(display_date)"
 
@@ -40,5 +40,3 @@ display_time rm -rf ${BACKUP_WORKING_DIR}/tmp_db/${TARGET_NAME}
 
 echo "[INFO] $(display_date)"
 echo "[INFO] Done"
-
-popd >/dev/null 2>&1

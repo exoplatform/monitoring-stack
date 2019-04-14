@@ -22,15 +22,15 @@ fi
 BACKUP_DATE=$1
 
 if ${REMOTE_BACKUP}; then
-  rsync -av ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_DIR}/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/ 
-  rsync -av ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_DIR}/${PLF_NAME}-db-${BACKUP_DATE}.sql.bz2 ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_WORKING_DIR}/tmp_db/
-  rsync -av ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_DIR}/${PLF_NAME}-${CHAT_DATABASE}-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_WORKING_DIR}/tmp_mongo/
-  rsync -av ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_DIR}/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elasticsearch/
-else
-  rsync -av ${BACKUP_DIR}/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/
+  rsync -av ${BACKUP_DIR}/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/ 
   rsync -av ${BACKUP_DIR}/${PLF_NAME}-db-${BACKUP_DATE}.sql.bz2 ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_WORKING_DIR}/tmp_db/
   rsync -av ${BACKUP_DIR}/${PLF_NAME}-${CHAT_DATABASE}-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_WORKING_DIR}/tmp_mongo/
-  rsync -av ${BACKUP_DIR}/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elasticsearch/ 
+  rsync -av ${BACKUP_DIR}/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elasticsearch/
+else
+  rsync -av ${BACKUP_DIR}/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 ${BACKUP_WORKING_DIR}/tmp_data/
+  rsync -av ${BACKUP_DIR}/${PLF_NAME}-db-${BACKUP_DATE}.sql.bz2 ${BACKUP_WORKING_DIR}/tmp_db/
+  rsync -av ${BACKUP_DIR}/${PLF_NAME}-${CHAT_DATABASE}-${BACKUP_DATE}.tar.bz2 ${BACKUP_WORKING_DIR}/tmp_mongo/
+  rsync -av ${BACKUP_DIR}/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 ${BACKUP_WORKING_DIR}/tmp_elasticsearch/ 
 fi
 
 DOWNTIME_START_TIME=$(date +%s)

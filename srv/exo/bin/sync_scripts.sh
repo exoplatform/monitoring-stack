@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eu
 
 ####
 # Copy the management scripts on all the servers
@@ -17,23 +17,36 @@ source ${SCRIPT_DIR}/setenv.sh
 source ${SCRIPT_DIR}/_functions.sh
 echo ""
 
+add_server_fingerprint() {
+  local SERVER=$1
+
+  if ! $(grep -q ${SERVER} ~/.ssh/known_hosts); then
+    echo "[INFO] Add ${SERVER} server fingerprint on known_hosts file ..."
+    ssh-keyscan -H ${SERVER} &>> ~/.ssh/known_hosts
+  fi
+}
+
 sync_files() {
   local CONNECT_STRING=$1
-  rsync -avP --delete --backup ${SCRIPT_DIR}/backups ${SCRIPT_DIR}/ ${CONNECT_STRING}:${SCRIPT_DIR}
+  rsync -avP --delete --backup ${SCRIPT_DIR}/backup --exclude backup ${SCRIPT_DIR} ${CONNECT_STRING}:$(dirname ${SCRIPT_DIR})
 }
 
 mkdir -p backup
 
 echo "[INFO] Copying script to eXo server..."
+add_server_fingerprint ${EXO_PLF_SERVER}
 sync_files ${EXO_USER}@${EXO_PLF_SERVER}
 
 echo "[INFO] Copying script to database server..."
+add_server_fingerprint ${EXO_DB_SERVER}
 sync_files ${EXO_USER}@${EXO_DB_SERVER}
 
 echo "[INFO] Copying script to mongo server..."
+add_server_fingerprint ${EXO_MONGO_SERVER}
 sync_files ${EXO_USER}@${EXO_MONGO_SERVER}
 
 echo "[INFO] Copying script to elasticsearch server..."
+add_server_fingerprint ${EXO_ES_SERVER}
 sync_files ${EXO_USER}@${EXO_ES_SERVER}
 
 echo "[INFO] $(display_date) Done"

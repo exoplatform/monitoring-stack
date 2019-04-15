@@ -28,10 +28,10 @@ add_server_fingerprint() {
 
 sync_files() {
   local CONNECT_STRING=$1
-  rsync -avP --delete --backup ${SCRIPT_DIR}/backup --exclude backup ${SCRIPT_DIR} ${CONNECT_STRING}:$(dirname ${SCRIPT_DIR})
+  rsync -avP --delete --backup ${SCRIPT_DIR}/backups --exclude backups ${SCRIPT_DIR} ${CONNECT_STRING}:$(dirname ${SCRIPT_DIR})
 }
 
-mkdir -p backup
+mkdir -p backups
 
 echo "[INFO] Copying script to eXo server..."
 add_server_fingerprint ${EXO_PLF_SERVER}

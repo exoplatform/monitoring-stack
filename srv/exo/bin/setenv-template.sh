@@ -27,8 +27,8 @@ EXO_ES_SERVER=${ES_SERVER}
 EXO_DB_SERVER=${DB_SERVER}
 EXO_MONGO_SERVER=${MONGO_SERVER}
 EXO_USER=exo
-BACKUP_DIR=/srv/backup
-BACKUP_WORKING_DIR=/var/backup
+BACKUP_DIR=/srv/backups
+BACKUP_WORKING_DIR=/srv/tmp
 #Database Backup
 EXO_DATABASE=exo
 # The directory where the eXo "data" directory is present

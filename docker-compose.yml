@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   web:
-    image: traefik:${IMAGE_TRAEFIK_VERSION:-1.5-alpine}
+    image: traefik:${IMAGE_TRAEFIK_VERSION:-1.7-alpine}
     hostname: traefik
     restart: always
     labels: 
@@ -17,7 +17,7 @@ services:
       - "80:80"
       - "443:443"
   grafana:
-    image: grafana/grafana:${IMAGE_GRAFANA_VERSION:-5.0.1}
+    image: grafana/grafana:${IMAGE_GRAFANA_VERSION:-6.3.6}
     hostname: grafana
     expose:
       - '3000'
@@ -51,7 +51,7 @@ services:
       - grafana_log:/var/log/grafana:rw
     restart: on-failure
   db_grafana:
-    image: ${IMAGE_GRAFANA_DB_NAME:-mysql}:${IMAGE_GRAFANA_DB_VERSION:-5.6}
+    image: ${IMAGE_GRAFANA_DB_NAME:-mysql}:${IMAGE_GRAFANA_DB_VERSION:-5.7}
     hostname: db-grafana
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_GRAFANA_ROOT_PASSWORD:-secretpassword}
@@ -63,7 +63,7 @@ services:
     volumes:
       - db_grafana_data:/var/lib/mysql:rw
   influxdb:
-    image: influxdb:${IMAGE_INFLUXDB_VERSION:-1.5-alpine}
+    image: influxdb:${IMAGE_INFLUXDB_VERSION:-1.7-alpine}
     hostname: influxdb
     expose: 
       - '8086'

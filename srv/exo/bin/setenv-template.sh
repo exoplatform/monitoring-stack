@@ -22,13 +22,13 @@
 PLF_SRV_DIR=/srv/exo
 PLF_LOG_DIR=/srv/exo/current/logs
 PLF_NAME=exo
-EXO_PLF_SERVER=${PLF_SERVER}
-EXO_ES_SERVER=${ES_SERVER}
-EXO_DB_SERVER=${DB_SERVER}
-EXO_MONGO_SERVER=${MONGO_SERVER}
+EXO_PLF_SERVER=localhost
+EXO_ES_SERVER=localhost
+EXO_DB_SERVER=localhost
+EXO_MONGO_SERVER=localhost
 EXO_USER=exo
-BACKUP_DIR=/srv/backups
-BACKUP_WORKING_DIR=/srv/tmp
+BACKUP_DIR=/var/backups/exo
+BACKUP_WORKING_DIR=/var/backups/tmp
 #Database Backup
 EXO_DATABASE=exo
 # The directory where the eXo "data" directory is present
@@ -38,7 +38,7 @@ CHAT_DATABASE=chat
 #Elastic Backup
 ELASTICSEARCH_DATA_DIR=/srv/data/elasticsearch
 # Retrieve the backup on the server launching the restore
-REMOTE_BACKUP=true
+REMOTE_BACKUP=false
 # Backup the current data before restoring
 BACKUP_ON_RESTORE=true
 # Number of backups to keep

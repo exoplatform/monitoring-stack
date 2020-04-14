@@ -7,6 +7,23 @@ shopt -s expand_aliases
 alias display_time='/usr/bin/time -f "[INFO] Return code : %x\n[INFO] Time report (sec) : \t%e real,\t%U user,\t%S system"'
 alias display_date='/bin/date +"%Y-%m-%d %H:%M:%S"'
 
+getSSHCommand() {
+  if [ $# -ne 2 ]; then
+    echo ""
+    echo "[ERROR] No enough parameters for function getSSHCommand"
+    echo "[ERROR] The target host and the user must be specified"
+    exit 1
+  fi
+  TARGET=$1
+  USER=$2
+
+  if [ "${TARGET}" == "localhost" ] || [ "${TARGET}" == "127.0.0.1" ]; then
+    echo ""
+  else
+   echo "ssh ${USER}@${TARGET}" # space is important here
+  fi
+}
+
 # $1 : Startup time
 # $2 : End time
 delay() {

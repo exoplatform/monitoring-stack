@@ -25,7 +25,7 @@ echo "[INFO] $(display_date)"
 
 pushd ${BACKUP_WORKING_DIR}/tmp_data >/dev/null 2>&1
 
-display_time tar --directory ${EXO_DATA_DIR} --use-compress-prog=pbzip2 -cpf ${BACKUP_WORKING_DIR}/tmp_data/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 data
+display_time tar --directory ${EXO_DATA_DIR} --use-compress-prog=pbzip2 -cpf ${BACKUP_WORKING_DIR}/tmp_data/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 .
 
 popd >/dev/null 2>&1
 echo "[INFO] Done"

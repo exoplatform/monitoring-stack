@@ -39,6 +39,9 @@ ${SSH_COMMAND} ${SCRIPT_DIR}/_startElasticsearch.sh
 # Start it
 ${SSH_COMMAND} ${SCRIPT_DIR}/_starteXo.sh
 
+# Warmup the server
+${SSH_COMMAND} ${SCRIPT_DIR}/warmup.sh
+
 DOWNTIME_END_TIME=$(date +%s)
 if [ "${REMOTE_BACKUP}" == true ]; then
   rsync -av ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/* ${BACKUP_DIR}

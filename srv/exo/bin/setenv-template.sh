@@ -43,3 +43,12 @@ REMOTE_BACKUP=false
 BACKUP_ON_RESTORE=true
 # Number of backups to keep
 BACKUP_RETENTION=7
+
+## Server Warmup 
+# This configuration allow to perform
+# several requests on the server to initiate
+# the js compilation and initial cache loading
+WARMUP_ACTIVATED=false
+WARMUP_URL=http://localhost:8080
+WARMUP_USER=root
+WARMUP_PASSWORD=gtn

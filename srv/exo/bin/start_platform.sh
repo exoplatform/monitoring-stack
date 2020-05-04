@@ -24,5 +24,7 @@ ${SSH_COMMAND} ${SCRIPT_DIR}/_startMongo.sh
 ${SSH_COMMAND} ${SCRIPT_DIR}/_startElasticsearch.sh
 ${SSH_COMMAND} ${SCRIPT_DIR}/_starteXo.sh
 
+${SSH_COMMAND} ${SCRIPT_DIR}/warmup.sh
+
 echo "[INFO] $(display_date)"
 echo "[INFO] Plateform started"

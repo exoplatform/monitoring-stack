@@ -18,37 +18,37 @@
 # 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 #
 
-# Directories
+# used folder for backup scripts
+SCRIPT_DIR=/srv/exo/bin
+# Logical Volume associated to /srv mounted partition 
+EXO_LV=
+DB_LV=
+#LVM SNAPSHOT SIZE on GB
+LVM_SNAPSHOT_SIZE=80
+#Used Folders
+#exo server parent Dir
 PLF_SRV_DIR=/srv/exo
+#exo server logs dir
 PLF_LOG_DIR=/srv/exo/current/logs
-PLF_NAME=exo
-EXO_PLF_SERVER=localhost
-EXO_ES_SERVER=localhost
-EXO_DB_SERVER=localhost
-EXO_MONGO_SERVER=localhost
-EXO_USER=exo
-BACKUP_DIR=/var/backups/exo
-BACKUP_WORKING_DIR=/var/backups/tmp
-#Database Backup
-EXO_DATABASE=exo
-# The directory where the eXo "data" directory is present
-EXO_DATA_DIR=/srv/data/exo
-#Mongo Backup
-CHAT_DATABASE=chat
-#Elastic Backup
-ELASTICSEARCH_DATA_DIR=/srv/data/elasticsearch
-# Retrieve the backup on the server launching the restore
-REMOTE_BACKUP=false
-# Backup the current data before restoring
+#exo and DB data dirs
+EXO_DATA_DIR=/srv
+#SNAPSHOT Backup dir to mount lvm snapshot
+SNAPSHOT_BACKUP_DIR=/var/backups/exo
+SNAPSHOT_DB_BACKUP_DIR=/var/backups/exo
+#Target folder for backuped data 
+EXO_BCK_DIR=/mnt/nfs/backup/exo
+#Temp folder used during restore data
+EXO_BCK_TEMP_DIR=/var/backups/tmp_exo
+# When True, data are backuped before restore
 BACKUP_ON_RESTORE=true
-# Number of backups to keep
+#eXo Host
+EXO_PLF_SERVER=localhost
+# DB Host
+EXO_DB_SERVER=localhost
+# Name Used for the plaform's service
+PLF_NAME=exo
+# User used for backup
+EXO_USER=exo
+# Retentions backup on days
 BACKUP_RETENTION=7
 
-## Server Warmup 
-# This configuration allow to perform
-# several requests on the server to initiate
-# the js compilation and initial cache loading
-WARMUP_ACTIVATED=false
-WARMUP_URL=http://localhost:8080
-WARMUP_USER=root
-WARMUP_PASSWORD=gtn

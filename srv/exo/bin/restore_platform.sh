@@ -19,43 +19,31 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-SSH_COMMAND="$(getSSHCommand ${EXO_PLF_SERVER} ${EXO_USER})"
+SSH_EXO_COMMAND="$(getSSHCommand ${EXO_PLF_SERVER} ${EXO_USER})"
+SSH_DB_COMMAND="$(getSSHCommand ${EXO_DB_SERVER} ${EXO_USER})"
 
 BACKUP_DATE=$1
 
-if [ "${REMOTE_BACKUP}" == "true" ] ; then
-  rsync -av ${BACKUP_DIR}/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/ 
-  rsync -av ${BACKUP_DIR}/${PLF_NAME}-db-${BACKUP_DATE}.sql.bz2 ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_WORKING_DIR}/tmp_db/
-  rsync -av ${BACKUP_DIR}/${PLF_NAME}-${CHAT_DATABASE}-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_WORKING_DIR}/tmp_mongo/
-  rsync -av ${BACKUP_DIR}/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elasticsearch/
-else
-  rsync -av ${BACKUP_DIR}/${PLF_NAME}-data-${BACKUP_DATE}.tar.bz2 ${BACKUP_WORKING_DIR}/tmp_data/
-  rsync -av ${BACKUP_DIR}/${PLF_NAME}-db-${BACKUP_DATE}.sql.bz2 ${BACKUP_WORKING_DIR}/tmp_db/
-  rsync -av ${BACKUP_DIR}/${PLF_NAME}-${CHAT_DATABASE}-${BACKUP_DATE}.tar.bz2 ${BACKUP_WORKING_DIR}/tmp_mongo/
-  rsync -av ${BACKUP_DIR}/${PLF_NAME}-es-${BACKUP_DATE}.tar.bz2 ${BACKUP_WORKING_DIR}/tmp_elasticsearch/ 
-fi
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_getLocalArchiveDBData.sh ${BACKUP_DATE}
+${SSH_EXO_COMMAND} ${SCRIPT_DIR}/_getLocalArchiveExoData.sh ${BACKUP_DATE}
 
 DOWNTIME_START_TIME=$(date +%s)
 
 # Stop it
-${SSH_COMMAND} ${SCRIPT_DIR}/_stopeXo.sh
-
-# restore data
-${SSH_COMMAND} ${SCRIPT_DIR}/_restoreData.sh ${BACKUP_DATE}
-
-# Dump database
-${SSH_COMMAND} ${SCRIPT_DIR}/_restoreMysqlDatabase.sh ${BACKUP_DATE}
-
-# Dump MongoDB
-${SSH_COMMAND} ${SCRIPT_DIR}/_restoreMongoDb.sh ${BACKUP_DATE}
-
-# Dump Elastic
-${SSH_COMMAND} ${SCRIPT_DIR}/_stopElasticsearch.sh
-${SSH_COMMAND} ${SCRIPT_DIR}/_restoreElasticsearch.sh ${BACKUP_DATE}
-${SSH_COMMAND} ${SCRIPT_DIR}/_startElasticsearch.sh
+${SSH_EXO_COMMAND} ${SCRIPT_DIR}/_stopeXo.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_stopElasticsearch.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_stopMongo.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_stopDatabase.sh
+# restore exo data
+${SSH_EXO_COMMAND} ${SCRIPT_DIR}/_restoreExoData.sh ${BACKUP_DATE}
+# restore DB data
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_restoreDBData.sh ${BACKUP_DATE}
 
 # Start it
-${SSH_COMMAND} ${SCRIPT_DIR}/_starteXo.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_startElasticsearch.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_startMongo.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_startDatabase.sh
+${SSH_EXO_COMMAND} ${SCRIPT_DIR}/_starteXo.sh
 
 DOWNTIME_END_TIME=$(date +%s)
 SCRIPT_END_TIME=$(date +%s)

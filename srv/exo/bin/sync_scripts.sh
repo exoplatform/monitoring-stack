@@ -28,7 +28,7 @@ add_server_fingerprint() {
 
 sync_files() {
   local CONNECT_STRING=$1
-  rsync -avP --delete --backup ${SCRIPT_DIR}/backups --exclude backups ${SCRIPT_DIR} ${CONNECT_STRING}:$(dirname ${SCRIPT_DIR})
+  rsync -avP ${SCRIPT_DIR} ${CONNECT_STRING}:$(dirname ${SCRIPT_DIR})
 }
 
 mkdir -p backups
@@ -40,13 +40,5 @@ sync_files ${EXO_USER}@${EXO_PLF_SERVER}
 echo "[INFO] Copying script to database server..."
 add_server_fingerprint ${EXO_DB_SERVER}
 sync_files ${EXO_USER}@${EXO_DB_SERVER}
-
-echo "[INFO] Copying script to mongo server..."
-add_server_fingerprint ${EXO_MONGO_SERVER}
-sync_files ${EXO_USER}@${EXO_MONGO_SERVER}
-
-echo "[INFO] Copying script to elasticsearch server..."
-add_server_fingerprint ${EXO_ES_SERVER}
-sync_files ${EXO_USER}@${EXO_ES_SERVER}
 
 echo "[INFO] $(display_date) Done"

@@ -1,0 +1,2 @@
+Cmnd_Alias      EXO_LVM_CMD = /sbin/lvcreate ,/sbin/lvremove ,/bin/umount ,/bin/mount ,/sbin/dmsetup ,/sbin/lvdisplay,/bin/tar ,/bin/rm ,/bin/mv
+exo ALL=(ALL) NOPASSWD: EXO_LVM_CMD

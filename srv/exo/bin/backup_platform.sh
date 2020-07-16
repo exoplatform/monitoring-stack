@@ -17,45 +17,34 @@ DOWNTIME_START_TIME=$(date +%s)
 
 BACKUP_DATE=$(date "+%Y-%m-%d-%H%M%S")
 
-SSH_COMMAND="$(getSSHCommand ${EXO_PLF_SERVER} ${EXO_USER})"
+SSH_EXO_COMMAND="$(getSSHCommand ${EXO_PLF_SERVER} ${EXO_USER})"
+SSH_DB_COMMAND="$(getSSHCommand ${EXO_DB_SERVER} ${EXO_USER})"
 
 # Stop it
-${SSH_COMMAND} ${SCRIPT_DIR}/_stopeXo.sh
+${SSH_EXO_COMMAND} ${SCRIPT_DIR}/_stopeXo.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_stopElasticsearch.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_stopMongo.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_stopDatabase.sh
 
 # Dump data
-${SSH_COMMAND} ${SCRIPT_DIR}/_dumpData.sh ${BACKUP_DATE}
+${SSH_EXO_COMMAND} ${SCRIPT_DIR}/_dumpExoData.sh ${BACKUP_DATE}
 
 # Dump database
-${SSH_COMMAND} ${SCRIPT_DIR}/_dumpMysqlDatabase.sh ${BACKUP_DATE}
-
-# Dump MongoDB
-${SSH_COMMAND} ${SCRIPT_DIR}/_dumpMongoDb.sh ${BACKUP_DATE}
-
-# Dump Elastic
-${SSH_COMMAND} ${SCRIPT_DIR}/_stopElasticsearch.sh
-${SSH_COMMAND} ${SCRIPT_DIR}/_dumpElasticsearch.sh ${BACKUP_DATE}
-${SSH_COMMAND} ${SCRIPT_DIR}/_startElasticsearch.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_dumpDBData.sh ${BACKUP_DATE}
 
 # Start it
-${SSH_COMMAND} ${SCRIPT_DIR}/_starteXo.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_startElasticsearch.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_startMongo.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_startDatabase.sh
+${SSH_EXO_COMMAND} ${SCRIPT_DIR}/_starteXo.sh
 
-# Warmup the server
-${SSH_COMMAND} ${SCRIPT_DIR}/warmup.sh
 
 DOWNTIME_END_TIME=$(date +%s)
-if [ "${REMOTE_BACKUP}" == true ]; then
-  rsync -av ${EXO_USER}@${EXO_PLF_SERVER}:${BACKUP_WORKING_DIR}/tmp_data/* ${BACKUP_DIR}
-  rsync -av ${EXO_USER}@${EXO_DB_SERVER}:${BACKUP_WORKING_DIR}/tmp_db/* ${BACKUP_DIR}
-  rsync -av ${EXO_USER}@${EXO_MONGO_SERVER}:${BACKUP_WORKING_DIR}/tmp_mongo/* ${BACKUP_DIR}
-  rsync -av ${EXO_USER}@${EXO_ES_SERVER}:${BACKUP_WORKING_DIR}/tmp_elasticsearch/* ${BACKUP_DIR}
-else
-  rsync -av ${BACKUP_WORKING_DIR}/tmp_data/* ${BACKUP_DIR}
-  rsync -av ${BACKUP_WORKING_DIR}/tmp_db/* ${BACKUP_DIR}
-  rsync -av ${BACKUP_WORKING_DIR}/tmp_mongo/* ${BACKUP_DIR}
-  rsync -av ${BACKUP_WORKING_DIR}/tmp_elasticsearch/* ${BACKUP_DIR}
-fi
+${SSH_EXO_COMMAND} ${SCRIPT_DIR}/_archiveExoData.sh ${BACKUP_DATE}
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_archiveDBData.sh ${BACKUP_DATE}
 
-${SCRIPT_DIR}/_cleanBackups.sh
+${SSH_EXO_COMMAND} ${SCRIPT_DIR}/_cleanBackups.sh
+${SSH_DB_COMMAND} ${SCRIPT_DIR}/_cleanBackups.sh
 
 SCRIPT_END_TIME=$(date +%s)
 
